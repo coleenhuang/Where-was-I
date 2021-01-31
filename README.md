@@ -12,7 +12,7 @@ password
 Books table
 id
 book_name
-chapters
+
 
 Chapters table
 id
@@ -20,6 +20,7 @@ chapter_name
 book_id(fk)
 
 Read_Chapters table
+id
 chapter_id(fk)
 user_id(fk)
 in_progress(bool)
