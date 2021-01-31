@@ -5,7 +5,24 @@ This is a bible reading tracker that helps keep track of what you've read in the
 
 ## DB Schema
 Users table
+id
+username
+password
 
 Books table
+id
+book_name
+chapters
 
 Chapters table
+id
+chapter_name
+book_id(fk)
+
+User Chapter table
+chapter_id(fk)
+user_id(fk)
+read(bool)
+date_read
+
+

@@ -1,5 +1,5 @@
 {
-  "name": "simple-react-full-stack",
+  "name": "where-was-i",
   "version": "1.0.0",
   "description": "Boilerplate to build a full stack web application using React, Node.js, Express and Webpack.",
   "main": "src/server/index.js",
@@ -14,16 +14,20 @@
   "license": "ISC",
   "dependencies": {
     "babel-polyfill": "^6.26.0",
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
     "cookie-parser": "^1.4.5",
     "debug": "^4.3.1",
     "express": "^4.16.3",
     "http-errors": "^1.8.0",
+    "mocha": "^8.2.1",
     "morgan": "^1.10.0",
     "path": "^0.12.7",
     "pg": "^8.5.1",
     "postgrator": "^4.1.1",
     "react": "^16.5.2",
-    "react-dom": "^16.5.2"
+    "react-dom": "^16.5.2",
+    "supertest": "^6.1.3"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",
