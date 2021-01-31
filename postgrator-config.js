@@ -6,7 +6,9 @@ const db = (process.env.NODE_ENV === 'test') ? process.env.TEST_DB_DATABASE: pro
 const connectionString = `postgresql://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}:${process.env.DB_PORT}/${db}`
 
 module.exports = {
-"migrationsDirectory": __dirname + "/migrations",
+  "migrationsDirectory": `migrations`,
   "driver": "pg",
-  "connectionString": connectionString
+  "connectionString": connectionString,
+  "username": process.env.DB_USER,
+  "password": process.env.DB_PASSWORD
   }

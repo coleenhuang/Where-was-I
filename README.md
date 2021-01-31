@@ -19,10 +19,9 @@ id
 chapter_name
 book_id(fk)
 
-User Chapter table
+Read_Chapters table
 chapter_id(fk)
 user_id(fk)
-read(bool)
-date_read
+in_progress(bool)
 
 
