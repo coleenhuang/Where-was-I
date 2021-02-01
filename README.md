@@ -30,19 +30,19 @@ in_progress(bool)
 /users  
 return the whole list of users
 
-/users/:id  
+/users/:user_id  
 returns the user with that id
 
 /books  
 returns a list of all the books
 
-/books/:name  
+/books/:book_name  
 returns the book of that name
 
 /chapters 
 returns a list of all the chapters
 
-/chapters/:id  
+/chapters/:chapter_id  
 return the chapter with that id
 
 /read/:user_id  

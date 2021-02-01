@@ -10,7 +10,8 @@
     "server": "nodemon src/server/index.js",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "migrate": "postgrator --config postgrator-config.js",
-    "migrate:test": "env NODE_ENV=test npm run migrate"
+    "migrate:test": "env NODE_ENV=test npm run migrate",
+    "test": "mocha"
   },
   "author": "Sandeep Raveesh",
   "license": "ISC",
