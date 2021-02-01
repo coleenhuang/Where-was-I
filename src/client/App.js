@@ -1,12 +1,15 @@
-import React, { Component } from 'react';
+import axios from 'axios';
+import React, { useState } from 'react';
 import './app.css';
 
-export default class App extends Component {
-  render() {
-    return (
-      <div>
-        Where was I?
-      </div>
-    );
-  }
+const App = () => {
+  return (
+    <div>
+      <h1>Where was I?</h1>
+    </div>
+  )
 }
+
+
+
+export default App;
