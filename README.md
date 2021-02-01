@@ -37,6 +37,19 @@ returns the user with that id
 returns a list of all the books
 
 /books/:name  
-return the book of that name
+returns the book of that name
 
+/chapters 
+returns a list of all the chapters
 
+/chapters/:id  
+return the chapter with that id
+
+/read/:user_id  
+returns the chapters that the user has read or is in the middle of reading
+
+/read/:user_id/in_progress  
+returns the chapters the user is in progress of reading
+
+/read/:user_id/finished  
+returns the chapters the user has finished
