@@ -11,7 +11,7 @@
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "migrate": "postgrator --config postgrator-config.js",
     "migrate:test": "env NODE_ENV=test npm run migrate",
-    "test": "mocha"
+    "test": "mocha --recursive \"./src/server/test/*.js\""
   },
   "author": "Sandeep Raveesh",
   "license": "ISC",
