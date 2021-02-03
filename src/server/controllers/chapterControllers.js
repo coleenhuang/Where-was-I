@@ -12,7 +12,7 @@ exports.chapter_list = function (req, res) {
 
 exports.specific_chapter = function(req, res) {
     //gets specific chapter
-    const chapterId = req.params.id;
+    const chapterId = req.params.chapter_id;
 
     pool.query('SELECT * FROM chapters WHERE id = $1', [chapterId], (error, results) => {
         if (error) {

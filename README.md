@@ -26,7 +26,7 @@ chapter_id(fk)
 user_id(fk)
 in_progress(bool)
 
-### Endpoints
+### GET Endpoints
 /users  
 return the whole list of users
 
