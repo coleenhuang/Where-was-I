@@ -38,7 +38,7 @@ describe('Book routes', () => {
 
   describe('GET /books/book_id', () => {
     context('No books in the db', () => {
-      const bookId = 23
+      const bookId = 2
       it('responds with 404', () => {
         return supertest(app)
         .get(`/books/${bookId}`)
