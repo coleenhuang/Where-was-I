@@ -63,7 +63,7 @@ describe('Chapter routes', () => {
       it('responds with 404', () => {
         return supertest(app)
         .get(`/chapters/${chapter_id}`)
-        .expect(404, {error: { message: 'Book doesn\'t exist'}})
+        .expect(404, {error: { message: 'Chapter doesn\'t exist'}})
       })
     })
     
@@ -97,7 +97,7 @@ describe('Chapter routes', () => {
       it('responds with a 404, bc no chapters with that id', () => {
         return supertest(app)
         .get('/chapters/26')
-        .expect(404, {error: { message: 'Book doesn\'t exist'}})
+        .expect(404, {error: { message: 'Chapter doesn\'t exist'}})
       })
     })
   })
