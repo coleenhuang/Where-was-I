@@ -18,6 +18,11 @@ exports.specific_book = function (req, res) {
         if (error) {
             throw(error)
         }
+        if (results.rows.length <= 0) {
+            return res.status(404).json({
+                error: { message: `Book doesn't exist` }
+              })
+        }
         res.status(200).json(results.rows)
     })
 }
