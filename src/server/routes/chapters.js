@@ -4,5 +4,5 @@ const chapterController = require('../controllers/chapterControllers')
 
 router.get('/', chapterController.chapter_list);
 
-router.get('/:chapter_id')
+router.get('/:chapter_id', chapterController.specific_chapter);
 module.exports = router;

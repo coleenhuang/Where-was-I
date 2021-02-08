@@ -33,6 +33,7 @@
     "morgan": "^1.10.0",
     "path": "^0.12.7",
     "pg": "^8.5.1",
+    "pg-promise": "^10.9.2",
     "postgrator-cli": "^4.0.0",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
