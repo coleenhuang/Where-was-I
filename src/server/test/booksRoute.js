@@ -164,7 +164,7 @@ describe('Book routes', () => {
         })().catch(e => console.error(e.stack)))
 
       it('responds with 200 and the correct chapters for the book', () => {
-        const expectedArray = makeChaptersArrayWithBookname().find(chapter => chapter.book_name === 'Genesis')
+        let expectedArray = makeChaptersArrayWithBookname().filter(chapter => chapter.book_name === 'Genesis')
 
         return supertest(app)
         .get('/books/1/chapters')

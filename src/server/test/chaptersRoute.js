@@ -70,7 +70,7 @@ describe('Chapter routes', () => {
       })
   })
 
-  describe('GET /chapters/chapter_id', () => {
+  describe('GET /chapters/:chapter_id', () => {
     context('No chapters in the db', () => {
       const chapter_id = 1
       it('responds with 404', () => {

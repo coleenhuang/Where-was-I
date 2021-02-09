@@ -28,5 +28,18 @@ exports.specific_book = function (req, res) {
 }
 
 exports.book_chapters = function (req, res) {
-    res.status(200).json("Method not implemented")
+    //Get the chapters of a specific book
+    const bookId = req.params.book_id
+    pool.query('SELECT c.id, c.chapter_name, b.book_name FROM chapters c, books b WHERE c.book_id = b.id AND b.id = $1', [bookId], (error, results) => {
+        if (error) {
+            throw(error)
+        }
+        if (results.rows.length <= 0) {
+            return res.status(404).json({
+                error: { message: `Chapter doesn't exist` }
+              })
+        }
+
+        res.status(200).json(results.rows)
+    })
 }
