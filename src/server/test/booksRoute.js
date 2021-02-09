@@ -22,10 +22,16 @@ describe('Book routes', () => {
     })
     context('Given there are books in the db', () => {
       const testBooks = makeBooksArray();
+      const bookValues = []
+      testBooks.forEach(book => {
+        bookValues.push(book.book_name)
+        bookValues.push(book.num_of_chapts)
+      })
       const query = {
-        text: 'INSERT INTO books(book_name) VALUES($1), ($2)',
-        values: [testBooks[0].book_name, testBooks[1].book_name],
+        text: 'INSERT INTO books(book_name, num_of_chapts) VALUES($1, $2), ($3, $4)',
+        values: bookValues,
       }
+
       beforeEach(() => pool.query(query))
 
       it('responds with 200 and all the books', () => {
@@ -48,17 +54,25 @@ describe('Book routes', () => {
     
     context('Given there are books in the db', () => {
       const testBooks = makeBooksArray();
+      const bookValues = []
+      testBooks.forEach(book => {
+        bookValues.push(book.book_name)
+        bookValues.push(book.num_of_chapts)
+      })
+
       const query = {
-        text: 'INSERT INTO books(book_name) VALUES($1), ($2)',
-        values: [testBooks[0].book_name, testBooks[1].book_name],
+        text: 'INSERT INTO books(book_name, num_of_chapts) VALUES($1, $2), ($3, $4)',
+        values: bookValues,
       }
+
       beforeEach(() => pool.query(query))
       it('responds with 200 and the book with the correct id', () => {
         return supertest(app)
         .get('/books/2')
         .expect(200, [{
           id: 2,
-          book_name: 'Exodus'
+          book_name: 'Exodus',
+          num_of_chapts: 40
         }])
       }) 
       

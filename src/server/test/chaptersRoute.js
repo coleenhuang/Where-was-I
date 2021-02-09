@@ -26,13 +26,25 @@ describe('Chapter routes', () => {
         const testBooks = makeBooksArray();
         const testChapters = makeChaptersArray();
 
+        const bookValues = []
+        testBooks.forEach(book => {
+            bookValues.push(book.book_name)
+            bookValues.push(book.num_of_chapts)
+        })
         const bookQuery = {
-          text: 'INSERT INTO books(book_name) VALUES($1), ($2)',
-          values: [testBooks[0].book_name, testBooks[1].book_name],
+            text: 'INSERT INTO books(book_name, num_of_chapts) VALUES($1, $2), ($3, $4)',
+            values: bookValues,
         }
+
+        const chapterValues = []
+        testChapters.forEach(chapter => {
+            chapterValues.push(chapter.chapter_name)
+            chapterValues.push(chapter.book_id)
+        })
+
         const chapterQuery = {
             text: 'INSERT INTO chapters(chapter_name, book_id) VALUES($1, $2), ($3, $4)',
-            values: [testChapters[0].chapter_name, testChapters[0].book_id, testChapters[1].chapter_name, testChapters[1].book_id],
+            values: chapterValues
         }
         beforeEach(() => (async () => {
             const client = await pool.connect()
@@ -71,14 +83,27 @@ describe('Chapter routes', () => {
         const testBooks = makeBooksArray();
         const testChapters = makeChaptersArray();
 
+        const bookValues = []
+        testBooks.forEach(book => {
+            bookValues.push(book.book_name)
+            bookValues.push(book.num_of_chapts)
+        })
         const bookQuery = {
-          text: 'INSERT INTO books(book_name) VALUES($1), ($2)',
-          values: [testBooks[0].book_name, testBooks[1].book_name],
+            text: 'INSERT INTO books(book_name, num_of_chapts) VALUES($1, $2), ($3, $4)',
+            values: bookValues,
         }
+
+        const chapterValues = []
+        testChapters.forEach(chapter => {
+            chapterValues.push(chapter.chapter_name)
+            chapterValues.push(chapter.book_id)
+        })
+
         const chapterQuery = {
             text: 'INSERT INTO chapters(chapter_name, book_id) VALUES($1, $2), ($3, $4)',
-            values: [testChapters[0].chapter_name, testChapters[0].book_id, testChapters[1].chapter_name, testChapters[1].book_id],
+            values: chapterValues
         }
+
         beforeEach(() => (async () => {
             const client = await pool.connect()
             try {
