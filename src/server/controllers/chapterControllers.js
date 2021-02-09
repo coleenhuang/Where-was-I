@@ -2,7 +2,7 @@ const { pool } = require('../config');
 
 exports.chapter_list = function (req, res) {
     //gets all chapters
-    pool.query('SELECT * FROM chapters', (error, results) => {
+    pool.query('SELECT c.id, c.chapter_name, b.book_name FROM chapters c, books b WHERE c.book_id = b.id', (error, results) => {
         if (error) {
             throw(error)
         }
@@ -13,7 +13,7 @@ exports.chapter_list = function (req, res) {
 exports.specific_chapter = function(req, res) {
     //gets specific chapter
     const chapterId = req.params.chapter_id;
-    pool.query('SELECT * FROM chapters WHERE id = $1', [chapterId], (error, results) => {
+    pool.query('SELECT c.id, c.chapter_name, b.book_name FROM chapters c, books b WHERE c.book_id = b.id AND c.id = $1', [chapterId], (error, results) => {
         if (error) {
             throw(error)
         }

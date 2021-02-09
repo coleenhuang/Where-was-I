@@ -2,7 +2,7 @@ const { expect } = require('chai');
 const { pool } = require('../config');
 const supertest = require('supertest');
 const { makeBooksArray } = require('./books.fixtures');
-const { makeChaptersArray } = require('./chapters.fixtures');
+const { makeChaptersArray, makeChaptersArrayWithBookname } = require('./chapters.fixtures');
 const app = require('../app');
 
 
@@ -62,9 +62,10 @@ describe('Chapter routes', () => {
           })().catch(e => console.error(e.stack)))
   
         it('responds with 200 and all the chapters', () => {
+          const expectedResult = makeChaptersArrayWithBookname();
           return supertest(app)
           .get('/chapters')
-          .expect(200, testChapters);
+          .expect(200, expectedResult);
         })
       })
   })
