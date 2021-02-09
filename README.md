@@ -43,6 +43,9 @@ returns a list of all the books
 /books/:book_id 
 returns the book with that id
 
+/books/:book_id/chapters
+returns all the chapters for that book
+
 /chapters 
 returns a list of all the chapters
 

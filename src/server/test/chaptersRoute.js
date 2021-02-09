@@ -43,7 +43,7 @@ describe('Chapter routes', () => {
         })
 
         const chapterQuery = {
-            text: 'INSERT INTO chapters(chapter_name, book_id) VALUES($1, $2), ($3, $4)',
+            text: 'INSERT INTO chapters(chapter_name, book_id) VALUES($1, $2), ($3, $4), ($5, $6)',
             values: chapterValues
         }
         beforeEach(() => (async () => {
@@ -100,7 +100,7 @@ describe('Chapter routes', () => {
         })
 
         const chapterQuery = {
-            text: 'INSERT INTO chapters(chapter_name, book_id) VALUES($1, $2), ($3, $4)',
+            text: 'INSERT INTO chapters(chapter_name, book_id) VALUES($1, $2), ($3, $4), ($5, $6)',
             values: chapterValues
         }
 

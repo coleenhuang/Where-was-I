@@ -1,7 +1,8 @@
 const { expect } = require('chai');
 const { pool } = require('../config')
 const supertest = require('supertest');
-const { makeBooksArray } = require('./books.fixtures')
+const { makeBooksArray } = require('./books.fixtures');
+const { makeChaptersArray } = require('./chapters.fixtures')
 const app = require('../app');
 
 describe('Book routes', () => {
@@ -42,7 +43,7 @@ describe('Book routes', () => {
     })
   })
 
-  describe('GET /books/book_id', () => {
+  describe('GET /books/:book_id', () => {
     context('No books in the db', () => {
       const bookId = 2
       it('responds with 404', () => {
@@ -81,6 +82,107 @@ describe('Book routes', () => {
         .get('/books/23')
         .expect(404, {error: { message: 'Book doesn\'t exist'}})
       })
+    })
+  })
+
+  describe('GET /books/:book_id/chapters', () => {
+    context('Given there are no books in the db', () => {
+      it('responds with 404 and a error message', () => {
+        return supertest(app)
+        .get('/books/1/chapters')
+        .expect(404, {error: { message: 'Book doesn\'t exist'}})
+      })
+    })
+
+    context('Given that there are books but no chapters in the db', () => {
+      const testBooks = makeBooksArray();
+      const bookValues = []
+      testBooks.forEach(book => {
+        bookValues.push(book.book_name)
+        bookValues.push(book.num_of_chapts)
+      })
+
+      const query = {
+        text: 'INSERT INTO books(book_name, num_of_chapts) VALUES($1, $2), ($3, $4)',
+        values: bookValues,
+      }
+      
+      beforeEach(() => pool.query(query))
+
+      it('responds with 404 and a error message for a book that doesn\'t exist', () => {
+        return supertest(app)
+        .get('/books/22/chapters')
+        .expect(404, {error: { message: 'Book doesn\'t exist'}})
+      })
+
+      it('responds with 200 and an empty array for books that exist', () => {
+        return supertest(app)
+        .get('/books/2/chapters')
+        .expect(200, [])
+      })
+
+    })
+
+    context('Given that there are books and chapters in the db', () => {
+      const testBooks = makeBooksArray();
+      const testChapters = makeChaptersArray();
+
+      const bookValues = []
+      testBooks.forEach(book => {
+          bookValues.push(book.book_name)
+          bookValues.push(book.num_of_chapts)
+      })
+      const bookQuery = {
+          text: 'INSERT INTO books(book_name, num_of_chapts) VALUES($1, $2), ($3, $4)',
+          values: bookValues,
+      }
+
+      const chapterValues = []
+      testChapters.forEach(chapter => {
+          chapterValues.push(chapter.chapter_name)
+          chapterValues.push(chapter.book_id)
+      })
+
+      const chapterQuery = {
+          text: 'INSERT INTO chapters(chapter_name, book_id) VALUES($1, $2), ($3, $4), ($5, $6)',
+          values: chapterValues
+      }
+
+      beforeEach(() => (async () => {
+          const client = await pool.connect()
+          try {
+            await client.query('BEGIN')
+            const res = await client.query(bookQuery)
+            await client.query(chapterQuery)
+            await client.query('COMMIT')
+          } catch (e) {
+            await client.query('ROLLBACK')
+            throw e
+          } finally {
+            client.release()
+          }
+        })().catch(e => console.error(e.stack)))
+
+      it('responds with 200 and the correct chapters for the book', () => {
+        return supertest(app)
+        .get('/books/1/chapters')
+        .expect(200, [
+          {
+            id: 1,
+            chapter_name: 1
+          },
+          {
+            id: 3,
+            chapter_name: 2
+          }
+        ])
+      })
+      it('it responds with 404 and an error message for a book that doesn\'t exist', () => {
+        return supertest(app)
+        .get('/books/22/chapters')
+        .expect(404, {error: { message: 'Book doesn\'t exist'}})
+      })
+
     })
   })
   
