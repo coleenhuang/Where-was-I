@@ -1,0 +1,2 @@
+ALTER TABLE books
+ADD COLUMN num_of_chapts INTEGER NOT NULL;
