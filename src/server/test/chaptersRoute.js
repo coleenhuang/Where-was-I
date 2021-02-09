@@ -124,6 +124,16 @@ describe('Chapter routes', () => {
         .get('/chapters/26')
         .expect(404, {error: { message: 'Chapter doesn\'t exist'}})
       })
+
+      it('responds with 200 and the chapter of that id', () => {
+          return supertest(app)
+          .get('/chapters/2')
+          .expect(200, [{
+              id: 2,
+              chapter_name: 1,
+              book_name: 'Exodus'
+          }])
+      })
     })
   })
 })

@@ -40,8 +40,8 @@ returns the user with that id
 /books  
 returns a list of all the books
 
-/books/:book_name  
-returns the book of that name
+/books/:book_id 
+returns the book with that id
 
 /chapters 
 returns a list of all the chapters
