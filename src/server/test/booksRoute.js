@@ -2,7 +2,7 @@ const { expect } = require('chai');
 const { pool } = require('../config')
 const supertest = require('supertest');
 const { makeBooksArray } = require('./books.fixtures');
-const { makeChaptersArray } = require('./chapters.fixtures')
+const { makeChaptersArray, makeChaptersArrayWithBookname } = require('./chapters.fixtures')
 const app = require('../app');
 
 describe('Book routes', () => {
@@ -164,18 +164,11 @@ describe('Book routes', () => {
         })().catch(e => console.error(e.stack)))
 
       it('responds with 200 and the correct chapters for the book', () => {
+        const expectedArray = makeChaptersArrayWithBookname().find(chapter => chapter.book_name === 'Genesis')
+
         return supertest(app)
         .get('/books/1/chapters')
-        .expect(200, [
-          {
-            id: 1,
-            chapter_name: 1
-          },
-          {
-            id: 3,
-            chapter_name: 2
-          }
-        ])
+        .expect(200, expectedArray)
       })
       it('it responds with 404 and an error message for a book that doesn\'t exist', () => {
         return supertest(app)

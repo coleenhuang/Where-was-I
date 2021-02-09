@@ -26,3 +26,7 @@ exports.specific_book = function (req, res) {
         res.status(200).json(results.rows)
     })
 }
+
+exports.book_chapters = function (req, res) {
+    res.status(200).json("Method not implemented")
+}
