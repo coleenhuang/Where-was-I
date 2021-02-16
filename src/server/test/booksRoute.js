@@ -118,7 +118,7 @@ describe('Book routes', () => {
       it('responds with 200 and an empty array for books that exist', () => {
         return supertest(app)
         .get('/books/2/chapters')
-        .expect(200, [])
+        .expect(404, {error: { message: 'Book doesn\'t exist'}})
       })
 
     })

@@ -36,7 +36,7 @@ exports.book_chapters = function (req, res) {
         }
         if (results.rows.length <= 0) {
             return res.status(404).json({
-                error: { message: `Chapter doesn't exist` }
+                error: { message: `Book doesn't exist` }
               })
         }
 
