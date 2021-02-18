@@ -2,3 +2,16 @@ body {
   text-align: center;
   margin: auto;
 }
+.grid {
+  display: grid;
+}
+
+.book-name {
+  background-color: aliceblue;
+}
+
+.chapter {
+  background-color: antiquewhite;
+  width: 16px;
+  height: 16px;
+}

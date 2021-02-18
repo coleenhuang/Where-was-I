@@ -3,18 +3,19 @@ import Book from './Book';
 import { connect } from 'react-redux';
 import * as actions from '../actions'
 
-//container for the books and chapters
-//Get a list of books from the api
 
 const Chart = (props) => {
     const bookList = ['Genesis', 'Exodus', 'Leviticus', 'Numbers', 'Deuteronomy']
     useEffect(() => {
         props.fetchBooks()
+        return () => {
+            //clean up books
+            props.clearBooks();
+        };
     }, [])
     console.log(props.bookList)
     return (
-        <div>
-            Chart
+        <div className='grid'>
             {renderBooks(props.bookList)}
         </div>
     )

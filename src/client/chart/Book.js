@@ -6,8 +6,8 @@ import Chapter from './Chapter';
 
 const Book = (props) => {
     return (
-        <div className='book-name'>
-            {props.name}
+        <div >
+            <h2 className='book-name'>{props.name}</h2>
             {renderChapters(props.chapts)}
         </div>
     )
