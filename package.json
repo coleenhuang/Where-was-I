@@ -38,8 +38,9 @@
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
     "react-redux": "^7.2.2",
+    "react-router-dom": "^5.2.0",
     "redux": "^4.0.5",
-    "redux-thunk": "^2.3.0",
+    "redux-promise": "^0.6.0",
     "supertest": "^6.1.3"
   },
   "devDependencies": {

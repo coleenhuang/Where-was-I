@@ -6,7 +6,7 @@ import React from 'react';
 const Chapter = (props) => {
     return (
         <div>
-
+            {props.num}
         </div>
     )
 }
