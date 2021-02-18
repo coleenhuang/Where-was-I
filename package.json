@@ -11,7 +11,7 @@
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "migrate": "postgrator --config postgrator-config.js",
     "migrate:test": "env NODE_ENV=test npm run migrate",
-    "test": "mocha --recursive \"./src/server/test/*.js\""
+    "test": "cross-env NODE_ENV=test mocha --recursive \"./src/server/test/*.js\""
   },
   "author": "Sandeep Raveesh",
   "license": "ISC",
@@ -52,6 +52,7 @@
     "babel-loader": "^8.0.0",
     "clean-webpack-plugin": "^1.0.0",
     "concurrently": "^4.0.0",
+    "cross-env": "^7.0.3",
     "css-loader": "^2.0.0",
     "eslint": "^5.0.0",
     "eslint-config-airbnb": "^17.0.0",
