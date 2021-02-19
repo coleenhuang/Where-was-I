@@ -10,8 +10,20 @@ body {
   background-color: aliceblue;
 }
 
-.chapter {
-  background-color: antiquewhite;
-  width: 16px;
-  height: 16px;
+.chapter-shape {
+  height: 20px;
+  width: 20px;
+}
+
+.unread {
+  background-color: whitesmoke;
+}
+
+.in-progress {
+  background-color: thistle;
+}
+
+.read {
+  background-color: rosybrown;
+  border-radius: 50%;
 }
