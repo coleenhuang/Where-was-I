@@ -1,6 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato&family=Raleway&display=swap');
+
 body {
   text-align: center;
   margin: auto;
+  font-family: 'Raleway', sans-serif;
+}
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Lato', sans-serif;
 }
 .chart {
   max-width: 800px;
@@ -9,6 +15,7 @@ body {
 
 .book-name {
   background-color: aliceblue;
+  padding: 0.5rem;
 }
 
 .chapt-grid {
@@ -26,13 +33,11 @@ body {
 }
 
 
-
-
 .in-progress {
   background-color: thistle;
 }
 
 .read {
-  background-color: rosybrown;
+  background-color: green;
   border-radius: 50%;
 }
