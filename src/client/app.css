@@ -2,22 +2,31 @@ body {
   text-align: center;
   margin: auto;
 }
-.grid {
-  display: grid;
+.chart {
+  max-width: 800px;
+  margin: 0 auto;
 }
 
 .book-name {
   background-color: aliceblue;
 }
 
-.chapter-shape {
-  height: 20px;
-  width: 20px;
+.chapt-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: auto;
 }
 
-.unread {
-  background-color: whitesmoke;
+.chapter-shape {
+  width: 30px;
+  margin: 1rem auto;
+  padding: 0.5rem;
+  font-size: 22px;
+  text-align: center;
 }
+
+
+
 
 .in-progress {
   background-color: thistle;

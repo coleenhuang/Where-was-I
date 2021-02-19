@@ -13,9 +13,9 @@ const Chart = (props) => {
             props.clearBooks();
         };
     }, [])
-    console.log(props.bookList)
+
     return (
-        <div className='grid'>
+        <div className='chart'>
             {renderBooks(props.bookList)}
         </div>
     )

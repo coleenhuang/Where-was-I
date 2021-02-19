@@ -19,9 +19,7 @@ const Chapter = (props) => {
     }
     return (
         <div className={`chapter-shape ${read}`} onClick={handleClick}>
-            <p className='chapter'>
                 {props.num}
-            </p>
         </div>
     )
 }

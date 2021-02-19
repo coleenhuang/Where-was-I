@@ -8,7 +8,10 @@ const Book = (props) => {
     return (
         <div >
             <h2 className='book-name'>{props.name}</h2>
-            {renderChapters(props.chapts)}
+            <div className='chapt-grid'>
+                {renderChapters(props.chapts)}
+            </div>
+            
         </div>
     )
 }
