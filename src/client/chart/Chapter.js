@@ -19,7 +19,7 @@ const Chapter = (props) => {
     }
     return (
         <div className={`chapter-shape ${read}`} onClick={handleClick}>
-                {props.num}
+                <p>{props.num}</p>
         </div>
     )
 }
