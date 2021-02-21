@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato&family=Raleway&display=swap');
-@import './colors.css';
+@import './variables.css';
 * {
   box-sizing: border-box;
 }
@@ -9,9 +9,16 @@ body {
   margin: auto;
   font-family: 'Raleway', sans-serif;
   color: var(--grey-9);
+  background-color: var(--dark-shades);
+  padding: 0 5%;
 }
+
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Lato', sans-serif;
+}
+
+h1{
+ color: var(--light-shades);
 }
 .chart {
   max-width: 800px;
@@ -19,12 +26,16 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .book {
-  background-color: var(--primary-0);
+  border: 1px solid var(--primary-1);
+  margin-bottom: 2rem;
+  background-color: var(--light-shades);
+  border-radius: var(--round-corner);
 }
 
 .book-name {
-  background-color: var(--primary-5);
-  padding: 0.5rem;
+  color: var(--main);
+  margin: 0;
+  padding: 0.75rem;
 }
 
 .chapt-grid {
