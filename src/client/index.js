@@ -9,11 +9,9 @@ ReactDOM.render(
   <Root>
     <BrowserRouter>
     <Auth0Provider
-    domain={process.env.REACT_APP_DOMAIN}
-    clientId={process.env.REACT_APP_CLIENT_ID}
+    domain='dev-8nc46zea.us.auth0.com'
+    clientId='8B7zEoiux7zKa3195rIE6LpmgtYnsGla'
     redirectUri={window.location.origin}
-    audience={process.env.REACT_APP_AUDIENCE}
-    scope="read:current_user update:current_user_metadata"
     >
         <App />
       </Auth0Provider>

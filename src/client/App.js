@@ -4,6 +4,7 @@ import './app.css';
 import Chart from './chart/Chart';
 import LoginButton from './loginButton';
 import LogoutButton from './logoutButton';
+import Profile from './profile';
 
 const App = () => {
   return (
@@ -12,6 +13,7 @@ const App = () => {
       <LogoutButton />
       <h1>Where was I?</h1>
       <Chart />
+      <Profile />
     </div>
   )
 }

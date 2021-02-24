@@ -60,3 +60,11 @@ returns the chapters the user is in progress of reading
 
 /read/:user_id/finished  
 returns the chapters the user has finished
+
+### POST Endpoints
+
+/read
+body :{
+    userId
+    chapter
+}

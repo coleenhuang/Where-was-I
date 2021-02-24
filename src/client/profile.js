@@ -8,15 +8,20 @@ const Profile = () => {
     return <div>Loading ...</div>;
   }
 
+  console.log(user)
+
   return (
     isAuthenticated && (
       <div>
         <img src={user.picture} alt={user.name} />
         <h2>{user.name}</h2>
         <p>{user.email}</p>
+        <p>{user.sub}</p>
       </div>
     )
   );
 };
+
+//sub is the user_id use that for identification
 
 export default Profile;
