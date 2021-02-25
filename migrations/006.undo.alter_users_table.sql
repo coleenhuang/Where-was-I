@@ -1,0 +1,3 @@
+ALTER TABLE users
+ADD COLUMN user_name VARCHAR(299),
+ADD COLUMN password VARCHAR(299);

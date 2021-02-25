@@ -1,0 +1,4 @@
+ALTER TABLE users
+DROP COLUMN usernamE,
+DROP COLUMN email,
+DROP COLUMN userid;
