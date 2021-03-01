@@ -2,12 +2,12 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import './app.css';
 import Chart from './chart/Chart';
-import LoginButton from './loginButton';
-import LogoutButton from './logoutButton';
+import LoginButton from './auth/loginButton';
+import LogoutButton from './auth/logoutButton';
 import Public from './Public';
 import Protected from './Protected';
-import Login from './Login';
-import PrivateRoute from './privateRoute';
+import Login from './auth/Login';
+import PrivateRoute from './auth/privateRoute';
 
 
 import { Route, Link } from 'react-router-dom';
