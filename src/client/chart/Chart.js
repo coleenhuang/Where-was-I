@@ -5,7 +5,6 @@ import * as actions from '../actions'
 
 
 const Chart = (props) => {
-    const bookList = ['Genesis', 'Exodus', 'Leviticus', 'Numbers', 'Deuteronomy']
     useEffect(() => {
         props.fetchBooks()
         return () => {
@@ -23,8 +22,8 @@ const Chart = (props) => {
 
 function renderBooks(bookList) {
     if (bookList.length > 0) {
-        return bookList.map(book => (
-            <Book name={book.book_name} chapts={book.num_of_chapts}/>
+        return bookList.map((book, index) => (
+            <Book key={`book${index}`} name={book.book_name} chapts={book.num_of_chapts}/>
         ))
     }
     else {
