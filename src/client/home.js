@@ -1,5 +1,5 @@
 import React from 'react';
-import LoginButton from './auth/loginButton';
+
 
 
 //Landing page for login
@@ -10,7 +10,6 @@ export default () => {
     return (
         <div>
             <h3>Home</h3>
-            <LoginButton />
         </div>
     )
 }

@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import './app.css';
+import Nav from './nav';
 import Chart from './chart/Chart';
 import Public from './Public';
 import Protected from './Protected';
@@ -13,7 +14,7 @@ import { Route, Link } from 'react-router-dom';
 const App = () => {
   return (
     <div>
-      <h1>Where was I?</h1>
+      <Nav />
       <div>
         <ul>
           <li><Link to="/public">Public Page</Link></li>

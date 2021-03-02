@@ -8,7 +8,7 @@ body {
   text-align: center;
   margin: auto;
   font-family: 'Raleway', sans-serif;
-  color: var(--grey-9);
+  color: var(--light-shades);
   background-color: var(--dark-shades);
   padding: 0 5%;
 }
