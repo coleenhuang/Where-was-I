@@ -50,6 +50,7 @@ h1{
   margin: 0.5rem auto;
   padding: 0.5rem;
   font-size: 22px;
+  color: var(--dark-shades);
   text-align: center;
   display: flex;
   justify-content: center;
