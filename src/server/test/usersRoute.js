@@ -46,9 +46,42 @@ describe('User routes', () => {
         context('Given there are no users', () => {
             it('should return 200 and an empty array', () => {
                 return supertest(app)
-                  .get('/api/users/1')
+                  .get('/api/users/legolas1234')
                   .expect(404, {error: { message: 'User doesn\'t exist'}});
                 });
+                
+            it('should return 404 and an error for an invalid userid', () => {
+                return supertest(app)
+                .get('/api/users/gollum1234')
+                .expect(404, {error: { message: `User doesn't exist` }})
+            })
+        })
+
+        context('Given there are users in the database', () => {
+            const testUsers = makeUsersArray();
+            const userValues = []
+            testUsers.forEach(user => {
+                userValues.push(user.username)
+                userValues.push(user.email)
+                userValues.push(user.userid)
+            })
+            const query = {
+                text: 'INSERT INTO users(username, email, userid) VALUES($1, $2, $3), ($4, $5, $6), ($7, $8, $9)',
+                values: userValues,
+            }
+            before(() => pool.query(query))
+
+            it('should return 200 and the correct user', () => {
+                return supertest(app)
+                .get('/api/users/legolas1234')
+                .expect(200, [testUsers[0]])
+            })
+
+            it('should return 404 and an error for an invalid userid', () => {
+                return supertest(app)
+                .get('/api/users/gollum1234')
+                .expect(404, {error: { message: `User doesn't exist` }})
+            })
         })
     })
 
@@ -66,7 +99,6 @@ describe('User routes', () => {
             })
             .set('Accept', 'application/json')
             .expect(201)
-
         })
         
     })
