@@ -3,6 +3,7 @@ const { pool } = require('../config');
 const supertest = require('supertest');
 const app = require('../app')
 const {makeUsersArray} = require('./users.fixtures');
+const { test } = require('mocha');
 
 describe('User routes', () => {
     before('clean the table', () => 
@@ -40,5 +41,24 @@ describe('User routes', () => {
                 .expect(200, testUsers)
             })
         })
+    })
+
+    describe('POST /api/users', () => {
+        const testUsers = makeUsersArray();
+        const user = testUsers[0]
+        
+        it('should insert a new user into the database', () => {
+            return supertest(app)
+            .post('/api/users')
+            .send({
+                username: user.username,
+                email: user.email,
+                userid: user.userid
+            })
+            .set('Accept', 'application/json')
+            .expect(201)
+
+        })
+        
     })
 })

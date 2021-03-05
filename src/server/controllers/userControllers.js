@@ -28,16 +28,26 @@ exports.specific_user = function (req, res) {
 }
 
 exports.create_user = function (req, res) {
-    const {name, email, userid} = req.body
-    if( !name || !email || userid) {
+    const {username, email, userid} = req.body
+    if( !username) {
         res.status(404).json({
-            error: {message: 'Please provide the user, email and userid'}
+            error: {message: 'Please provide the username, email and userid'}
         })
     }
-    pool.query('INSERT INTO users (name, email, userid) VALUES ($1, $2, $3)', [name, email, userid], (error, results) => {
+    else if( !email ) {
+        res.status(404).json({
+            error: {message: 'Please provide the username, email and userid'}
+        })
+    }
+    else if( !userid) {
+        res.status(404).json({
+            error: {message: 'Please provide the userid'}
+        })
+    }
+    pool.query('INSERT INTO users (username, email, userid) VALUES ($1, $2, $3)', [username, email, userid], (error, result) => {
         if (error) {
             throw(error)
         }
-        res.status(201).send(`User added with ID: ${result.insertId}`)
+        res.status(201).send(`User added`)
     })
 }
