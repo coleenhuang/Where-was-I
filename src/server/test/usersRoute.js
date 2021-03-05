@@ -1,9 +1,8 @@
-const { expect } = require('chai');
 const { pool } = require('../config');
 const supertest = require('supertest');
 const app = require('../app')
 const {makeUsersArray} = require('./users.fixtures');
-const { test } = require('mocha');
+
 
 describe('User routes', () => {
     before('clean the table', () => 
@@ -40,6 +39,16 @@ describe('User routes', () => {
                 .get('/api/users')
                 .expect(200, testUsers)
             })
+        })
+    })
+
+    describe('GET /api/users/:user_id', () => {
+        context('Given there are no users', () => {
+            it('should return 200 and an empty array', () => {
+                return supertest(app)
+                  .get('/api/users/1')
+                  .expect(404, {error: { message: 'User doesn\'t exist'}});
+                });
         })
     })
 
