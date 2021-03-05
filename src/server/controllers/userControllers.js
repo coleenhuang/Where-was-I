@@ -11,10 +11,10 @@ exports.user_list = function (req, res) {
 }
 
 exports.specific_user = function (req, res) {
-    //get specific book
+    //get specific user
     const userId = req.params.user_id
 
-    pool.query('SELECT * FROM users WHERE id = $1', [userId], (error, results) => {
+    pool.query('SELECT * FROM users WHERE userid = $1', [userId], (error, results) => {
         if (error) {
             throw(error)
         }
@@ -28,7 +28,12 @@ exports.specific_user = function (req, res) {
 }
 
 exports.create_user = function (req, res) {
-    const {name, email, userid} = req.body 
+    const {name, email, userid} = req.body
+    if( !name || !email || userid) {
+        res.status(404).json({
+            error: {message: 'Please provide the user, email and userid'}
+        })
+    }
     pool.query('INSERT INTO users (name, email, userid) VALUES ($1, $2, $3)', [name, email, userid], (error, results) => {
         if (error) {
             throw(error)
