@@ -1,0 +1,1 @@
+ALTER TABLE chapters DROP COLUMN num_of_verses;
