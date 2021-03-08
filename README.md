@@ -17,6 +17,7 @@ return the whole list of users
 /users/:user_id  
 returns the user with that id
 
+
 /books  
 returns a list of all the books
 
@@ -25,6 +26,10 @@ returns the book with that id
 
 /books/:book_id/chapters
 returns all the chapters for that book
+
+/books/:book_id/verses  
+returns all the verses for that book
+
 
 /chapters 
 returns a list of all the chapters
@@ -35,6 +40,7 @@ return the chapter with that id
 /chapters/:chapter_id/verses  
 returns all the verses for that chapter
 
+
 /read/:user_id  
 returns all the verses the user has read
 
@@ -44,14 +50,27 @@ returns all the read verses for that user within that book
 /read/:user_id/:chapter_id  
 returns all the read verses for that user within that chapter
 
+
 /plan/:user_id  
 returns all the books in the reading goals
 
 ### POST Endpoints
 needs to be able to create users, add read verses and create reading plans
 
-### PATCH Endpoints
+### PATCH or PUT Endpoints
 only thing that needs to be modified is the reading plan
 
 ### DELETE Endpoints
-delete the read verses and use to modify reading plan
+/read/:user_id  
+resets the reading progress. removes all read verses for that user
+
+/read/:user_id/:book_id  
+removes all read verses of that user for that book
+
+/read/:user_id/:chapter_id  
+removes all read verses of that user for that chapter
+
+/read/:user_id/:verse_id  
+removes the verse from the reader's read verses
+
+
