@@ -9,27 +9,6 @@ The front end of this app is built using React, and the backend is built using n
 
 ### DB Schema
 ![Database schema](/dbschema.png?raw=true)
-Users table
-id
-username
-email
-userid
-
-Books table
-id
-book_name
-num_of_chapts
-
-Chapters table
-id
-chapter_name
-book_id(fk)
-
-Read_Chapters table
-id
-chapter_id(fk)
-user_id(fk)
-in_progress(bool)
 
 ### GET Endpoints
 /users  
@@ -53,19 +32,14 @@ returns a list of all the chapters
 /chapters/:chapter_id  
 return the chapter with that id
 
-/read/:user_id  
-returns the chapters that the user has read or is in the middle of reading
+/chapters/:chapter_id/verses  
+returns all the verses for that chapter
 
-/read/:user_id/in_progress  
-returns the chapters the user is in progress of reading
 
-/read/:user_id/finished  
-returns the chapters the user has finished
+
 
 ### POST Endpoints
 
-/read
-body :{
-    userId
-    chapter
-}
+### PATCH Endpoints
+
+### DELETE Endpoints
