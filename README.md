@@ -8,16 +8,17 @@ The front end of this app is built using React, and the backend is built using n
 ## Backend
 
 ### DB Schema
+![Database schema](/dbschema.png?raw=true)
 Users table
 id
 username
-password
+email
+userid
 
 Books table
 id
 book_name
 num_of_chapts
-
 
 Chapters table
 id
