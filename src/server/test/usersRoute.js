@@ -6,10 +6,10 @@ const {makeUsersArray} = require('./users.fixtures');
 
 describe('User routes', () => {
     before('clean the table', () => 
-    pool.query('TRUNCATE users, books, chapters, read_chapters RESTART IDENTITY CASCADE')
+    pool.query('TRUNCATE users, books, chapters RESTART IDENTITY CASCADE')
     )
     afterEach('cleanup', () => 
-        pool.query('TRUNCATE users, books, chapters, read_chapters RESTART IDENTITY CASCADE')
+        pool.query('TRUNCATE users, books, chapters RESTART IDENTITY CASCADE')
     )
 
     describe('GET /api/users', () => {
@@ -49,7 +49,7 @@ describe('User routes', () => {
                   .get('/api/users/legolas1234')
                   .expect(404, {error: { message: 'User doesn\'t exist'}});
                 });
-                
+
             it('should return 404 and an error for an invalid userid', () => {
                 return supertest(app)
                 .get('/api/users/gollum1234')

@@ -8,10 +8,10 @@ const app = require('../app');
 
 describe('Chapter routes', () => {
     before('clean the table', () => 
-    pool.query('TRUNCATE users, books, chapters, read_chapters RESTART IDENTITY CASCADE')
+    pool.query('TRUNCATE users, books, chapters RESTART IDENTITY CASCADE')
   )
   afterEach('cleanup', () => 
-    pool.query('TRUNCATE users, books, chapters, read_chapters RESTART IDENTITY CASCADE')
+    pool.query('TRUNCATE users, books, chapters RESTART IDENTITY CASCADE')
   )
 
   describe('GET /api/chapters', () => {

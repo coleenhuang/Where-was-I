@@ -1,0 +1,1 @@
+DROP TABLE read_chapters;
