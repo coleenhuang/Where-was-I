@@ -1,0 +1,5 @@
+CREATE TABLE read_verses (
+    id SERIAL PRIMARY KEY,
+    verse_id INTEGER REFERENCES verses(id) ON DELETE CASCADE,
+    user_id INTEGER REFERENCES users(id) ON DELETE CASCADE
+)
