@@ -35,11 +35,23 @@ return the chapter with that id
 /chapters/:chapter_id/verses  
 returns all the verses for that chapter
 
+/read/:user_id  
+returns all the verses the user has read
 
+/read/:user_id/:book_id  
+returns all the read verses for that user within that book
 
+/read/:user_id/:chapter_id  
+returns all the read verses for that user within that chapter
+
+/plan/:user_id  
+returns all the books in the reading goals
 
 ### POST Endpoints
+needs to be able to create users, add read verses and create reading plans
 
 ### PATCH Endpoints
+only thing that needs to be modified is the reading plan
 
 ### DELETE Endpoints
+delete the read verses and use to modify reading plan
