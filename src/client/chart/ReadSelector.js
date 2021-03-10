@@ -16,7 +16,11 @@ export default (props) => {
                 <option>2</option>
                 <option>3</option>
             </select>
+            {
+            //TODO: When press done button, send the selected verses to the db
+            }
             <button onClick={props.close}>Done</button>
+
         </div>
     )
 }
