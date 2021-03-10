@@ -40,10 +40,11 @@ describe('Chapter routes', () => {
         testChapters.forEach(chapter => {
             chapterValues.push(chapter.chapter_name)
             chapterValues.push(chapter.book_id)
+            chapterValues.push(chapter.num_of_verses)
         })
 
         const chapterQuery = {
-            text: 'INSERT INTO chapters(chapter_name, book_id) VALUES($1, $2), ($3, $4), ($5, $6)',
+            text: 'INSERT INTO chapters(chapter_name, book_id, num_of_verses) VALUES($1, $2, $3), ($4, $5, $6), ($7, $8, $9)',
             values: chapterValues
         }
         beforeEach(() => (async () => {
@@ -98,10 +99,11 @@ describe('Chapter routes', () => {
         testChapters.forEach(chapter => {
             chapterValues.push(chapter.chapter_name)
             chapterValues.push(chapter.book_id)
+            chapterValues.push(chapter.num_of_verses)
         })
 
         const chapterQuery = {
-            text: 'INSERT INTO chapters(chapter_name, book_id) VALUES($1, $2), ($3, $4), ($5, $6)',
+            text: 'INSERT INTO chapters(chapter_name, book_id, num_of_verses) VALUES($1, $2, $3), ($4, $5, $6), ($7, $8, $9)',
             values: chapterValues
         }
 
