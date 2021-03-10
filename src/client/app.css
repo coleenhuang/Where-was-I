@@ -71,3 +71,7 @@ h1{
   background-color: var(--success-6);
   border-radius: 50%;
 }
+
+.read-selector {
+  background-color: var(--light-accent);
+}
