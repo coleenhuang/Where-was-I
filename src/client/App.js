@@ -23,8 +23,6 @@ const App = () => {
         </ul>
         <Switch>
         <Route exact path="/" component={Home} />
-        <Route path="/public" component={Public}/>
-        <PrivateRoute path="/protected" component={Protected} />
         <PrivateRoute path="/chart" component={Chart} />
         </Switch>
       </div>

@@ -9,7 +9,9 @@ export default () => {
     <button onClick={() => logout({ returnTo: window.location.origin })}>
       Log Out
     </button> :
-    <button onClick={() => loginWithRedirect()}>Log In</button>
+    <button onClick={() => loginWithRedirect()}>
+      Register / Log In
+    </button>
   );
 };
 
