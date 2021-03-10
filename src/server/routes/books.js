@@ -8,6 +8,8 @@ router.get('/:book_id', bookController.specific_book);
 
 router.get('/:book_id/chapters', bookController.book_chapters);
 
+
+//FIXME: not implemented yet
 router.get('/:book_id/verses', bookController.book_verses)
 
 module.exports = router;

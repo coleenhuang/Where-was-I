@@ -4,7 +4,7 @@ var router = express.Router();
 //FIXME: not implemented yet
 
 router.get('/', function(req, res, next) {
-    res.send('read');
+    res.send('plan');
 });
 
 module.exports = router;

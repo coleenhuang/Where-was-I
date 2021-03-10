@@ -45,6 +45,7 @@ exports.book_chapters = function (req, res) {
 }
 
 exports.book_verses = function (req, res) {
+    //FIXME: not implemented yet
     //Get all verses of a specific book
     res.status(200).send('not implemented yet')
 }
