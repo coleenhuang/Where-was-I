@@ -8,9 +8,20 @@ function makeBooksArray() {
         },
         {
           id: 2,
-          book_name: 'Matthew',
+          book_name: 'Exodus',
           num_of_chapts: 40,
-          testament: 'New'
+          testament: 'Old'
+        },
+        { id: 3,
+          book_name: 'Matthew',
+          num_of_chapts: 28,
+          testament:'New'
+        },
+        {
+          id: 4,
+          book_name: 'Mark',
+          num_of_chapts: 16,
+          testament:'New'
         }
       ]
 }

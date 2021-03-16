@@ -1,9 +1,9 @@
 const { expect } = require('chai');
-const { pool } = require('../config')
+const { pool } = require('../../config')
 const supertest = require('supertest');
-const { makeBooksArray } = require('./books.fixtures');
+const { makeBooksArray } = require('../books.fixtures');
 const { makeChaptersArray, makeChaptersArrayWithBookname } = require('./chapters.fixtures')
-const app = require('../app');
+const app = require('../../app');
 
 describe('Book routes', () => {
   before('clean the table', () => 

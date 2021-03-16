@@ -1,6 +1,6 @@
 const knex = require('knex');
 const BooksService = require('../services/booksService');
-
+const { makeBooksArray } = require('./books.fixtures');
 describe('Books service object', () => {
     let db;
     // Prepare the database connection using the `db` variable available
@@ -21,11 +21,23 @@ describe('Books service object', () => {
     // After all tests run, let go of the db connection
     after('destroy db connection', () => db.destroy());
 
+    const testBooks = makeBooksArray();
+
     describe('getAllBooks()', () => {
         it('returns an empty array', () => {
             return BooksService
               .getAllBooks(db)
               .then(books => expect(books).to.eql([]));
           });
+        context('there is data', () => {
+            before('insert data into books', () => {
+
+            })
+            it('returns all books', () => {
+                return BooksService
+                .getAllBooks(db)
+                .then(books => testBooks)
+            })
+        })
     })
 })
