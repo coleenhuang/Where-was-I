@@ -30,7 +30,7 @@ exports.specific_book = function (req, res) {
 exports.book_chapters = function (req, res) {
     //Get all chapters of a specific book
     const bookId = req.params.book_id
-    pool.query('SELECT c.id, c.chapter_name, b.book_name FROM chapters c, books b WHERE c.book_id = b.id AND b.id = $1', [bookId], (error, results) => {
+    pool.query('SELECT * FROM chapters c, books b WHERE c.book_id = b.id AND b.id = $1', [bookId], (error, results) => {
         if (error) {
             throw(error)
         }
@@ -45,7 +45,19 @@ exports.book_chapters = function (req, res) {
 }
 
 exports.book_verses = function (req, res) {
-    //FIXME: not implemented yet
     //Get all verses of a specific book
-    res.status(200).send('not implemented yet')
+    //FIXME: NOT implemented yet
+    const bookId = req.params.book_id
+    pool.query('SELECT * FROM chap c, books b WHERE c.book_id = b.id AND b.id = $1', [bookId], (error, results) => {
+        if (error) {
+            throw(error)
+        }
+        if (results.rows.length <= 0) {
+            return res.status(404).json({
+                error: { message: `Book doesn't exist` }
+              })
+        }
+
+        res.status(200).json(results.rows)
+    })
 }
