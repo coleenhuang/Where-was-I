@@ -49,7 +49,7 @@ describe('Books service object', () => {
             })
         })
     })
-    describe('getTestamentBooks()', () => {
+    describe('getByTestament()', () => {
         it('returns an empty array for OT', () => {
             return BooksService
             .getByTestament(db, 'Old')
@@ -88,6 +88,35 @@ describe('Books service object', () => {
                     expect(books).to.be.a('array');
                     expect(books).to.eql(expectedBooks);
                     expect(books).to.have.lengthOf(2);
+                })
+            })
+        })
+    })
+
+    describe('getById()', () => {
+        it('should return undefined', () => {
+            return BooksService
+            .getById(db, 999)
+            .then(books => expect(books).to.be.undefined)
+        })
+        context('there is data', () => {
+            beforeEach('insert data', () => db('books').insert(testBooks))
+            it('should return the existing book', () => {
+                const id = 1;
+                const expectedBook = testBooks.find(book => book.id === id)
+                return BooksService
+                .getById(db, id)
+                .then(books => {
+                    expect(books).to.eql(expectedBook);
+                })
+            })
+            it('should return undefined for nonexistent book', () => {
+                const id = 55;
+                
+                return BooksService
+                .getById(db, id)
+                .then(books => {
+                    expect(books).to.be.undefined;
                 })
             })
         })
