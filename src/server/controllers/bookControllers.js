@@ -1,4 +1,15 @@
-const { pool } = require('../config');
+const BooksService = require('../services/booksService')
+
+exports.list_books = function (req, res, next) {
+    const knexInstance = req.app.get('db')
+    BooksService.getAllBooks(knexInstance)
+      .then(books => {
+        res.json(books)
+      })
+      .catch(next)
+}
+
+/*const { pool } = require('../config');
 
 exports.book_list = function (req, res) {
     //gets all books
@@ -60,4 +71,4 @@ exports.book_verses = function (req, res) {
 
         res.status(200).json(results.rows)
     })
-}
+}*/
