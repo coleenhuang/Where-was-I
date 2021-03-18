@@ -1,12 +1,12 @@
 const BooksService = {
-    getAllBooks(db) {
-        return db('books').select('*')
+    getAllBooks(knex) {
+        return knex('books').select('*')
     },
-    getByTestament(db, testament) {
-        return db('books').where('testament', testament)
+    getByTestament(knex, testament) {
+        return knex('books').where('testament', testament)
     },
-    getById(db, id) {
-        return db('books').where('id', id).first()
+    getById(knex, id) {
+        return knex('books').where('id', id).first()
     }
 }
 
