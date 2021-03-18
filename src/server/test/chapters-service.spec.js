@@ -26,9 +26,65 @@ describe('Chapters service object', () => {
 
     const testBooks = makeBooksArray();
     const testChapters = makeChaptersArray();
+    describe('getAllChapters()', () => {
+        it('should return an empty array', () => {
+            return ChaptersService
+            .getAllChapters(db)
+            .then(chapters => {
+                expect(chapters).to.be.a('array');
+                expect(chapters).to.have.lengthOf(0);
+            })
+        });
+        context('there is data', () => {
+            beforeEach('insert data into books', () => 
+                db('books').insert(testBooks)
+            )
+            beforeEach('insert data into chapters', () => 
+                db('chapters').insert(testChapters)
+            )
+            it('should return all chapters', () => {
+                
+                return ChaptersService
+                .getAllChapters(db)
+                .then(chapters => {
+                expect(chapters).to.be.a('array');
+                expect(chapters).to.have.lengthOf(4);
+                })    
+            })
+        })
+    })
 
-    describe('getByBookId', () => {
+    describe('getById()', () => {
         it('should return undefined', () => {
+            return ChaptersService
+            .getById(db, 999)
+            .then(chapters => expect(chapters).to.be.undefined)
+        })
+        context('there is data', () => {
+            beforeEach('insert data into books', () => db('books').insert(testBooks))
+            beforeEach('insert data into chapters', () => db('chapters').insert(testChapters))
+            it('should return the existing chapter', () => {
+                const id = 1;
+                const expectedChapter = testChapters.find(chapter => chapter.id === id)
+                return ChaptersService
+                .getById(db, id)
+                .then(chapters => {
+                    expect(chapters).to.eql(expectedChapter);
+                })
+            })
+            it('should return undefined for nonexistent book', () => {
+                const id = 55;
+                
+                return ChaptersService
+                .getById(db, id)
+                .then(chapters => {
+                    expect(chapters).to.be.undefined;
+                })
+            })
+        })
+    })
+    describe('getByBookId()', () => {
+        it('should return an empty array', () => {
             return ChaptersService
             .getByBookId(db, 999)
             .then(chapters => {
