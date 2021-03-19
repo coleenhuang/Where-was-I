@@ -1,4 +1,5 @@
 const knex = require('knex');
+const supertest = require('supertest');
 const app = require('../app');
 const { makeBooksArray } = require('./books.fixtures');
 
@@ -35,6 +36,33 @@ describe('Books Endpoints', () => {
                   .get('/api/books')
                   .expect(200, testBooks)
               })
+        })
+    })
+
+    describe('GET /api/books/:book_id', () => {
+        const errorMessage = {
+            error: {message: 'Book doesn\'t exist'}
+        }
+        it('returns an error', () => {
+            return supertest(app)
+            .get('/api/books/1')
+            .expect(404, errorMessage )
+        })
+        context('there is data', () => {
+            beforeEach('insert data into books', () => 
+                db('books').insert(testBooks)
+            )
+            it('responds with 200 and the book', () => {
+                const expectedBook = testBooks[0]
+                return supertest(app)
+                .get('/api/books/1')
+                .expect(200, expectedBook)
+            })
+            it('returns an error for a book that doesn\'t exist', () => {
+                return supertest(app)
+                .get('/api/books/999')
+                .expect(404, errorMessage )
+            })
         })
     })
 })

@@ -13,6 +13,7 @@ exports.list_books = function (req, res, next) {
 
 exports.book_by_id = function (req, res, next) {
     const knexInstance = req.app.get('db');
+    const id = req.params.book_id
     BooksService.getById(knexInstance, id)
     .then(books => {
         if (!books) {
