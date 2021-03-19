@@ -4,12 +4,12 @@ const bookController = require('../controllers/bookControllers')
 
 router.get('/', bookController.list_books);
 
-/*router.get('/:book_id', bookController.specific_book);
+router.get('/:book_id', bookController.book_by_id);
 
 router.get('/:book_id/chapters', bookController.book_chapters);
 
 
 //FIXME: not implemented yet
-router.get('/:book_id/verses', bookController.book_verses)*/
+//router.get('/:book_id/verses', bookController.book_verses)
 
 module.exports = router;
