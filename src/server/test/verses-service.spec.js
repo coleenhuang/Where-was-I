@@ -70,9 +70,33 @@ describe('Verses Service object', () => {
     describe('getById()', () => {
         it('shoud return undefined', () => {
             return VersesService
-            .getById(db, 1)
+            .getById(db, 99)
             .then(verses => {
                 expect(verses).to.be.undefined
+            })
+        })
+        context('there is data', () => {
+            beforeEach('insert data', () => 
+                db('books').insert(testBooks)
+                .then(() => db('chapters').insert(testChapters))
+                .then(() => db('verses').insert(testVerses))
+            )
+            it('returns the verse', () => {
+                const verseId = 3
+                const expectedVerse = testVerses.find(verse => verse.id === verseId)
+                return VersesService
+                .getById(db, verseId)
+                .then(verses => {
+                    expect(verses).to.eql(expectedVerse)
+                })
+
+            })
+            it('shoud return undefined', () => {
+                return VersesService
+                .getById(db, 99)
+                .then(verses => {
+                    expect(verses).to.be.undefined
+                })
             })
         })
     })
