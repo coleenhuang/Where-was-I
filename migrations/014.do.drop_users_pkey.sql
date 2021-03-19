@@ -1,0 +1,4 @@
+ALTER TABLE users DROP CONSTRAINT users_pkey CASCADE;
+ALTER TABLE users DROP COLUMN id;
+
+

@@ -3,7 +3,7 @@ const VersesService = {
         return knex.select('*').from('verses').limit(limit).offset(offset)
     },
     getById(knex, id) {
-        return knex('verses').where('id', id)
+        return knex('verses').where('id', id).first()
     },
     getByChapterAndName(knex, chapter_id, name) {
         return knex('verses').where({

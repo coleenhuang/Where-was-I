@@ -67,4 +67,13 @@ describe('Verses Service object', () => {
             })
         })
     })
+    describe('getById()', () => {
+        it('shoud return undefined', () => {
+            return VersesService
+            .getById(db, 1)
+            .then(verses => {
+                expect(verses).to.be.undefined
+            })
+        })
+    })
 })
