@@ -35,11 +35,9 @@ describe('Chapters service object', () => {
             })
         });
         context('there is data', () => {
-            beforeEach('insert data into books', () => 
+            beforeEach('insert data', () => 
                 db('books').insert(testBooks)
-            )
-            beforeEach('insert data into chapters', () => 
-                db('chapters').insert(testChapters)
+                .then(() => db('chapters').insert(testChapters))
             )
             it('should return all chapters', () => {
                 
@@ -60,8 +58,11 @@ describe('Chapters service object', () => {
             .then(chapters => expect(chapters).to.be.undefined)
         })
         context('there is data', () => {
-            beforeEach('insert data into books', () => db('books').insert(testBooks))
-            beforeEach('insert data into chapters', () => db('chapters').insert(testChapters))
+            beforeEach('insert data', () => 
+                db('books').insert(testBooks)
+                .then(() => db('chapters').insert(testChapters))
+            )
+
             it('should return the existing chapter', () => {
                 const id = 1;
                 const expectedChapter = testChapters.find(chapter => chapter.id === id)
@@ -92,11 +93,9 @@ describe('Chapters service object', () => {
             })
         });
         context('there is data', () => {
-            beforeEach('insert data into books', () => 
+            beforeEach('insert data', () => 
                 db('books').insert(testBooks)
-            )
-            beforeEach('insert data into chapters', () => 
-                db('chapters').insert(testChapters)
+                .then(() => db('chapters').insert(testChapters))
             )
             const expectedChapters = [
                 {

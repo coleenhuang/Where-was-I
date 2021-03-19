@@ -76,11 +76,9 @@ describe('Books Endpoints', () => {
         })
 
         context('there is data', () => {
-            beforeEach('insert data into books', () => 
+            beforeEach('insert data', () => 
                 db('books').insert(testBooks)
-            )
-            beforeEach('insert data into chapters', () => 
-                db('chapters').insert(testChapters)
+                .then(() => db('chapters').insert(testChapters))
             )
             it('returns a list of chapters in that book', () => {
                 const expectedChapters = [

@@ -1,6 +1,10 @@
+const { expect } = require('chai')
 const knex = require('knex')
+const { before } = require('mocha')
+const VersesService = require('../services/versesService')
 const { makeBooksArray } = require('./books.fixtures')
 const {makeChaptersArray} = require('./chapters.fixtures')
+const {makeVersesArray} = require('./verses.fixtures')
 
 describe('Verses Service object', () => {
     let db;
@@ -24,4 +28,43 @@ describe('Verses Service object', () => {
 
     const testBooks = makeBooksArray();
     const testChapters = makeChaptersArray();
+    const testVerses = makeVersesArray();
+
+    describe('getAllVerses()', () => {
+        it('returns an empty array', () => {
+            return VersesService
+            .getAllVerses(db)
+            .then(verses => {
+                expect(verses).to.be.a('array');
+                expect(verses).to.have.lengthOf(0);
+            });
+        })
+        context('there is data', () => {
+            beforeEach('insert data', () => 
+                db('books').insert(testBooks)
+                .then(() => db('chapters').insert(testChapters))
+                .then(() => db('verses').insert(testVerses))
+            )
+            
+            it('returns all verses', () => {
+                return VersesService
+                .getAllVerses(db)
+                .then(verses => {
+                    expect(verses).to.be.a('array');
+                    expect(verses).to.have.lengthOf(7);
+                    expect(verses).to.eql(testVerses);
+                });
+            })
+            it('returns 2 verses when limit is set to 2 and offset 1', () => {
+                const expectedVerses = testVerses.slice(1,3);
+                return VersesService
+                .getAllVerses(db, 2, 1)
+                .then(verses => {
+                    expect(verses).to.be.a('array')
+                    expect(verses).to.have.lengthOf(2)
+                    expect(verses).to.eql(expectedVerses)
+                })
+            })
+        })
+    })
 })
