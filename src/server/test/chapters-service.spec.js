@@ -99,6 +99,22 @@ describe('Chapters service object', () => {
             beforeEach('insert data into chapters', () => 
                 db('chapters').insert(testChapters)
             )
+            const expectedChapters = [
+                {
+                    id: 1,
+                    chapter_name: 1,
+                    num_of_verses: 31,
+                    book_id: 1,
+                    book_name: 'Genesis'
+                },
+                {
+                    id: 2,
+                    chapter_name: 2,
+                    num_of_verses: 25,
+                    book_id: 1,
+                    book_name: 'Genesis'
+                }
+            ]
             it('should return the chapters for the book', () => {
                 const book_id = 1;
                 
@@ -107,8 +123,17 @@ describe('Chapters service object', () => {
                 .then(chapters => {
                     expect(chapters).to.be.a('array');
                     expect(chapters).to.have.lengthOf(2);
+                    expect(chapters).to.eql(expectedChapters)
                 })
             })
+            it('should return an empty array for a book that doesn\'t exist', () => {
+                return ChaptersService
+                .getByBookId(db, 999)
+                .then(chapters => {
+                    expect(chapters).to.be.a('array');
+                    expect(chapters).to.have.lengthOf(0);
+                })
+            });
         })
     })
     
