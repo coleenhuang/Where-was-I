@@ -1,6 +1,6 @@
 const VersesService = {
-    getAllVerses(knex) {
-        return knex('verses').select('*')
+    getAllVerses(knex, limit=50, offset=0) {
+        return knex('verses').select('*').limit(limit).offset(offset)
     },
     getById(knex, id) {
         return knex('verses').where('id', id)

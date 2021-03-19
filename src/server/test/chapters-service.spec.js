@@ -1,4 +1,3 @@
-const { expect } = require('chai');
 const knex = require('knex');
 const ChaptersService = require('../services/chaptersService');
 const { makeChaptersArray } = require('./chapters.fixtures');
