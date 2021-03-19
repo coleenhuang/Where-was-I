@@ -2,6 +2,7 @@ const knex = require('knex');
 const supertest = require('supertest');
 const app = require('../app');
 const { makeBooksArray } = require('./books.fixtures');
+const { makeChaptersArray } = require('./chapters.fixtures');
 
 describe('Books Endpoints', () => {
     let db;
@@ -20,6 +21,7 @@ describe('Books Endpoints', () => {
     after('disconnect from db', () => db.destroy());
 
     const testBooks = makeBooksArray();
+    const testChapters = makeChaptersArray();
 
     describe('GET /api/books', () => {
         it('returns an empty array', () => {
@@ -64,5 +66,50 @@ describe('Books Endpoints', () => {
                 .expect(404, errorMessage )
             })
         })
+    })
+
+    describe('GET /api/:book_id/chapters', () => {
+        it('returns an empty array', () => {
+            return supertest(app)
+            .get('/api/books/1/chapters')
+            .expect(200, []);
+        })
+
+        context('there is data', () => {
+            beforeEach('insert data into books', () => 
+                db('books').insert(testBooks)
+            )
+            beforeEach('insert data into chapters', () => 
+                db('chapters').insert(testChapters)
+            )
+            it('returns a list of chapters in that book', () => {
+                const expectedChapters = [
+                    {
+                        id: 1,
+                        chapter_name: 1,
+                        num_of_verses: 31,
+                        book_id: 1,
+                        id: 1,
+                        book_name: 'Genesis',
+                        num_of_chapts: 50,
+                        testament: 'Old'
+                    },
+                    {
+                        id: 2,
+                        chapter_name: 2,
+                        num_of_verses: 25,
+                        book_id: 1,
+                        id: 1,
+                        book_name: 'Genesis',
+                        num_of_chapts: 50,
+                        testament: 'Old'
+                    }
+                ]
+                return supertest(app)
+                .get('/api/books/1/chapters')
+                .expect(200, expectedChapters)
+            })
+        })
+
     })
 })

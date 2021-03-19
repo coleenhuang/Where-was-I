@@ -29,7 +29,8 @@ exports.book_by_id = function (req, res, next) {
 exports.book_chapters = function (req, res, next) {
     //Lists the chapters within the book
     const knexInstance = req.app.get('db');
-    ChaptersService.getByBookId(knexInstance, book_id)
+    const id = req.params.book_id
+    ChaptersService.getByBookId(knexInstance, id)
     .then(chapters => res.json(chapters))
     .catch(next)
 }
