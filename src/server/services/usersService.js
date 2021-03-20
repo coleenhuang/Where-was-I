@@ -3,7 +3,7 @@ const UsersService = {
         return knex('users').select('*')
     },
     getById(knex, id) {
-        return knex('users').where('userid', id)
+        return knex('users').where('userid', id).first()
     }
 }
 

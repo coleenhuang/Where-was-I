@@ -40,4 +40,28 @@ describe('Users Service Object', () => {
             })
         })
     })
+    describe('getById', () => {
+        it('shoud return undefined', () => {
+            return UsersService
+            .getById(db, 99)
+            .then(users => {
+                expect(users).to.be.undefined
+            })
+        })
+        context('there is data', () => {
+            beforeEach('insert data', () => 
+                db('users').insert(testUsers)
+            )
+            it('returns the user', () => {
+                const userId = 1
+                const expectedUser = testUsers.find(user => user.userid === userId)
+                return UsersService
+                .getById(db, userId)
+                .then(users => {
+                    expect(users).to.eql(expectedUser)
+                })
+
+            })
+        })
+    })
 })
