@@ -140,6 +140,65 @@ describe('Verses Service object', () => {
             })
         })
     })
-
+    describe('getByBook()', () => {
+        it('should return an empty array', () => {
+            return VersesService
+            .getByBook(db, 44)
+            .then(verses => {
+                expect(verses).to.be.a('array');
+                expect(verses).to.have.lengthOf(0)
+            })
+        })
+        context('there is data', () => {
+            beforeEach('insert data', () => 
+                db('books').insert(testBooks)
+                .then(() => db('chapters').insert(testChapters))
+                .then(() => db('verses').insert(testVerses))
+            )
+            it('should return a list of verses for that book', () => {
+                const expectedVerses = [
+                    {
+                        id: 1,
+                        verse_name: 1,
+                        chapter_id: 1,
+                        book_id: 1
+                    },
+                    {
+                        id: 2,
+                        verse_name: 2,
+                        chapter_id: 1,
+                        book_id: 1
+                    },
+                    {
+                        id: 3,
+                        verse_name: 1,
+                        chapter_id: 2,
+                        book_id: 1
+                    },
+                    {
+                        id: 4,
+                        verse_name: 2,
+                        chapter_id: 2,
+                        book_id: 1
+                    },
+                ]
+                return VersesService
+                .getByBook(db, 1)
+                .then(verses => {
+                    expect(verses).to.be.a('array')
+                    expect(verses).to.eql(expectedVerses)
+                })
+            })
+            it('returns an empty array', () => {
+                //Book with that id does not exist
+                return VersesService
+                .getByBook(db, 55)
+                .then(verses => {
+                    expect(verses).to.be.a('array');
+                    expect(verses).to.have.lengthOf(0)
+                })
+            })
+        })
+    })
     
 })
