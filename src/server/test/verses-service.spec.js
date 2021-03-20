@@ -3,8 +3,8 @@ const knex = require('knex')
 const { before } = require('mocha')
 const VersesService = require('../services/versesService')
 const { makeBooksArray } = require('./books.fixtures')
-const {makeChaptersArray} = require('./chapters.fixtures')
-const {makeVersesArray} = require('./verses.fixtures')
+const { makeChaptersArray } = require('./chapters.fixtures')
+const { makeVersesArray } = require('./verses.fixtures')
 
 describe('Verses Service object', () => {
     let db;
@@ -91,9 +91,49 @@ describe('Verses Service object', () => {
                 })
 
             })
-            it('shoud return undefined', () => {
+            it('should return undefined', () => {
                 return VersesService
                 .getById(db, 99)
+                .then(verses => {
+                    expect(verses).to.be.undefined
+                })
+            })
+        })
+    })
+
+    describe('getByChapterAndName()', () => {
+        it('should return undefined', () => {
+            return VersesService
+            .getByChapterAndName(db, 1, 2)
+            .then(verses => {
+                expect(verses).to.be.undefined
+            })
+        })
+        context('there is data', () => {
+            beforeEach('insert data', () => 
+                db('books').insert(testBooks)
+                .then(() => db('chapters').insert(testChapters))
+                .then(() => db('verses').insert(testVerses))
+            )
+            it('returns the verse', () => {
+                const verseName = 2;
+                const chapterId = 1;
+                const expectedVerse = {
+                    id: 2,
+                    verse_name: 2,
+                    chapter_id: 1
+                }
+                return VersesService
+                .getByChapterAndName(db, chapterId, verseName)
+                .then(verses => {
+                    expect(verses).to.eql(expectedVerse)
+                })
+            })
+            it('should return undefined', () => {
+                const verseName = 2;
+                const chapterId = 99;
+                return VersesService
+                .getByChapterAndName(db, chapterId, verseName)
                 .then(verses => {
                     expect(verses).to.be.undefined
                 })
