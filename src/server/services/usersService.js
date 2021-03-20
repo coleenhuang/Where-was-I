@@ -1,4 +1,4 @@
-const UserService = {
+const UsersService = {
     getAllUsers(knex) {
         return knex('users').select('*')
     },
@@ -6,3 +6,5 @@ const UserService = {
         return knex('users').where('userid', id)
     }
 }
+
+module.exports = UsersService
