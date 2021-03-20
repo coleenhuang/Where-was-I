@@ -15,7 +15,9 @@ const VersesService = {
         return knex('verses').where('chapter_id', chapter_id)
     },
     getByBook(knex, book_id) {
-        //Not implemented yet
+        return knex('verses').join('chapters', 'verses.chapter_id', '=', 'chapters.id')
+        .where('chapters.book_id', book_id)
+        .select('verses.id', 'verses.verse_name', 'verses.chapter_id', 'chapters.book_id')
     }
 
 }
