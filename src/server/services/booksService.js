@@ -3,7 +3,7 @@ const BooksService = {
         return knex('books').select('*')
     },
     getByTestament(knex, testament) {
-        return knex('books').where('testament', testament)
+        return knex('books').select('*').where('testament', testament)
     },
     getById(knex, id) {
         return knex('books').where('id', id).first()

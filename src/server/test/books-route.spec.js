@@ -41,6 +41,28 @@ describe('Books Endpoints', () => {
         })
     })
 
+    describe('GET /api/books?testament', () => {
+        it('returns an empty array', () => {
+            return supertest(app)
+            .get('/api/books')
+            .query({testament: 'Old'})
+            .expect(200, []);
+          });
+        context('there is data', () => {
+            beforeEach('insert data into books', () => 
+                db('books').insert(testBooks)
+            )
+            it('responds with 200 and all of the books', () => {
+                const expectedBooks = testBooks.filter(book => book.testament === 'Old')
+                return supertest(app)
+                  .get('/api/books?testament=Old')
+                  .expect(200, expectedBooks)
+              })
+        })
+    })
+
+
+
     describe('GET /api/books/:book_id', () => {
         const errorMessage = {
             error: {message: 'Book doesn\'t exist'}

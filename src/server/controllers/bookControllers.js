@@ -2,8 +2,24 @@ const BooksService = require('../services/booksService')
 const ChaptersService = require('../services/chaptersService');
 
 exports.list_books = function (req, res, next) {
-    // add the conditional when the testament query is present
+    //Gives a list of books
     const knexInstance = req.app.get('db')
+    let testament = req.query.testament
+    if (testament) {
+        //filter by testament query if it is present
+        if (testament !== 'Old' && testament !== 'New') {
+            res.status(404).json({
+                error: {message: 'Please enter either New or Old'}
+            })
+        }
+       else {
+            BooksService.getByTestament(knexInstance, testament)
+            .then(books => {
+                res.json(books)
+            })
+            .catch(next)
+        }
+    }
     BooksService.getAllBooks(knexInstance)
       .then(books => {
         res.json(books)
