@@ -35,66 +35,44 @@ exports.book_chapters = function (req, res, next) {
     .catch(next)
 }
 
-/*const { pool } = require('../config');
-
-exports.book_list = function (req, res) {
-    //gets all books
-    pool.query('SELECT * FROM books', (error, results) => {
-        if (error) {
-            throw(error)
+exports.book_verses = function (req, res, next) {
+    //Lists all the verses within the chapter
+    const knexInstance = req.app.get('db');
+    const limit = req.query.limit;
+    const offset = req.query.offset;
+    const book_id = req.params.book_id;
+    
+    if(limit) {
+        if (limit > 100 || limit < 0) {
+            res.status(404).json({
+                error: {message: 'Please enter a limit that is between 0 and 100'}
+            })
         }
-        res.status(200).json(results.rows)
-    })
+    }
+    if(offset && offset < 0) {
+        res.status(404).json({
+            error: {message: 'Please enter a offset that is greater than 0'}
+        })
+    }
+    if (limit && offset) {
+        VersesService.getByBook(knexInstance, book_id, limit, offset)
+        .then(verses => res.json(verses))
+        .catch(next)
+    }
+    else if (limit && !offset) {
+        VersesService.getByBook(knexInstance, book_id, limit)
+        .then(verses => res.json(verses))
+        .catch(next)
+    }
+    else if (offset && !limit) {
+        VersesService.getByBook(knexInstance, book_id, offset)
+        .then(verses => res.json(verses))
+        .catch(next)
+    }
+    else {
+        VersesService.getByBook(knexInstance, book_id)
+        .then(verses => res.json(verses))
+        .catch(next)
+    }
 }
-
-exports.specific_book = function (req, res) {
-    //get specific book
-    const bookId = req.params.book_id
-
-    pool.query('SELECT * FROM books WHERE id = $1', [bookId], (error, results) => {
-        if (error) {
-            throw(error)
-        }
-        if (results.rows.length <= 0) {
-            return res.status(404).json({
-                error: { message: `Book doesn't exist` }
-              })
-        }
-        res.status(200).json(results.rows)
-    })
-}
-
-exports.book_chapters = function (req, res) {
-    //Get all chapters of a specific book
-    const bookId = req.params.book_id
-    pool.query('SELECT * FROM chapters c, books b WHERE c.book_id = b.id AND b.id = $1', [bookId], (error, results) => {
-        if (error) {
-            throw(error)
-        }
-        if (results.rows.length <= 0) {
-            return res.status(404).json({
-                error: { message: `Book doesn't exist` }
-              })
-        }
-
-        res.status(200).json(results.rows)
-    })
-}
-
-exports.book_verses = function (req, res) {
-    //Get all verses of a specific book
-    //FIXME: NOT implemented yet
-    const bookId = req.params.book_id
-    pool.query('SELECT * FROM chap c, books b WHERE c.book_id = b.id AND b.id = $1', [bookId], (error, results) => {
-        if (error) {
-            throw(error)
-        }
-        if (results.rows.length <= 0) {
-            return res.status(404).json({
-                error: { message: `Book doesn't exist` }
-              })
-        }
-
-        res.status(200).json(results.rows)
-    })
-}*/
+ 
