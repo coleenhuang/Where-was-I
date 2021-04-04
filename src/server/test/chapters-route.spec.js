@@ -43,4 +43,31 @@ describe('Chapters endpoints', () => {
               })
         })
     })
+
+    describe('GET /api/chapters/:chapter_id', () => {
+        const errorMessage = {
+            error: {message: 'Chapter doesn\'t exist'}
+        }
+        it('returns an error', () => {
+            return supertest(app)
+            .get('/api/chapters/55')
+            .expect(404, errorMessage)
+        })
+        context('there is data', () => {
+            beforeEach('insert data into books', () => 
+                db('books').insert(testBooks)
+            )
+            beforeEach('insert data into chapters', () => 
+                db('chapters').insert(testChapters)
+            )
+            it('responds with 200 and the chapter', () => {
+                const expectedChapter = testChapters[0]
+                return supertest(app)
+                .get('/api/chapters/1')
+                .expect(200, expectedChapter)
+            })
+        })
+    })
+
+
 })

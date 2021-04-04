@@ -52,10 +52,11 @@ describe('Books Endpoints', () => {
             beforeEach('insert data into books', () => 
                 db('books').insert(testBooks)
             )
-            it('responds with 200 and all of the books', () => {
+            it('responds with 200 and all of the OT books', () => {
                 const expectedBooks = testBooks.filter(book => book.testament === 'Old')
                 return supertest(app)
-                  .get('/api/books?testament=Old')
+                  .get('/api/books')
+                  .query({testament: 'Old'})
                   .expect(200, expectedBooks)
               })
         })

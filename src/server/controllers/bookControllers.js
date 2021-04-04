@@ -52,7 +52,7 @@ exports.book_chapters = function (req, res, next) {
 }
 
 exports.book_verses = function (req, res, next) {
-    //Lists all the verses within the chapter
+    //Lists all the verses within the book
     const knexInstance = req.app.get('db');
     const limit = req.query.limit;
     const offset = req.query.offset;
