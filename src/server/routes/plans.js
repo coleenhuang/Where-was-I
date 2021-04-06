@@ -1,10 +1,8 @@
 var express = require('express');
 var router = express.Router();
+const planControllers = require('../controllers/planControllers')
 
-//FIXME: not implemented yet
-
-router.get('/:user_id', function(req, res, next) {
-    res.send('plan');
-});
+router.get('/:user_id', planControllers.user_plans);
+router.post('/', planControllers.add_entry);
 
 module.exports = router;
