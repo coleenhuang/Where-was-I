@@ -9,7 +9,5 @@ router.get('/:book_id', bookController.book_by_id);
 router.get('/:book_id/chapters', bookController.book_chapters);
 
 
-//FIXME: not implemented yet
-//router.get('/:book_id/verses', bookController.book_verses)
 
 module.exports = router;
