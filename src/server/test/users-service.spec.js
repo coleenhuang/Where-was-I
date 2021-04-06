@@ -41,7 +41,7 @@ describe('Users Service Object', () => {
         })
     })
     describe('getById', () => {
-        it('shoud return undefined', () => {
+        it('should return undefined', () => {
             return UsersService
             .getById(db, 99)
             .then(users => {

@@ -3,7 +3,7 @@ var router = express.Router();
 
 //FIXME: not implemented yet
 
-router.get('/', function(req, res, next) {
+router.get('/:user_id', function(req, res, next) {
     res.send('plan');
 });
 
