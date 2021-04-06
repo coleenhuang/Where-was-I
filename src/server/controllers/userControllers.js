@@ -27,27 +27,17 @@ exports.get_by_id = function (req, res, next) {
     .catch(next)
 }
 
-exports.create_user = function (req, res) {
+exports.create_user = function (req, res, next) {
+    const knexInstance = req.app.get('db');
     const {username, email, userid} = req.body
-    if( !username) {
+    if( !userid || !email || !username) {
         res.status(404).json({
             error: {message: 'Please provide the username, email and userid'}
         })
+        
     }
-    else if( !email ) {
-        res.status(404).json({
-            error: {message: 'Please provide the username, email and userid'}
-        })
-    }
-    else if( !userid) {
-        res.status(404).json({
-            error: {message: 'Please provide the userid'}
-        })
-    }
-    pool.query('INSERT INTO users (username, email, userid) VALUES ($1, $2, $3)', [username, email, userid], (error, result) => {
-        if (error) {
-            throw(error)
-        }
-        res.status(201).send(`User added`)
-    })
+
+    UsersService.addUser(knexInstance, userid, email, username)
+    .then(user => res.status(201).json(`user ${user[0]} added`))
+    .catch(next)
 }

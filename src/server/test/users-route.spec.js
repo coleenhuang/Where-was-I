@@ -57,4 +57,18 @@ describe('Users Endpoints', () => {
             })
         })
     })
+
+    describe('POST api/users', () => {
+        const errorMessage = {
+            error: {message: 'Please provide the username, email and userid'}
+        }
+        const testUser = testUsers[0];
+        it('inserts the user', () => {
+            return supertest(app)
+            .post('/api/users')
+            .send(testUser)
+            .expect(201)
+        })
+
+    })
 })

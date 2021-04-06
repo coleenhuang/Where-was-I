@@ -4,6 +4,9 @@ const UsersService = {
     },
     getById(knex, id) {
         return knex('users').where('userid', id).first()
+    },
+    addUser(knex, userid, email, username) {
+        return knex('users').insert({userid, email, username}, ['userid'])
     }
 }
 
