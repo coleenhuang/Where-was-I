@@ -1,30 +1,30 @@
-const { pool } = require('../config');
+const UsersService = require('../services/usersService')
 
-exports.user_list = function (req, res) {
+
+exports.list_users = function (req, res, next) {
     //gets all users
-    pool.query('SELECT * FROM users', (error, results) => {
-        if (error) {
-            throw(error)
-        }
-        res.status(200).json(results.rows)
+    const knexInstance = req.app.get('db');
+    UsersService.getAllUsers(knexInstance)
+    .then(users => {
+        res.json(users)
     })
+    .catch(next)
 }
 
-exports.specific_user = function (req, res) {
-    //get specific user
+exports.get_by_id = function (req, res, next) {
+    //get specific user by userid
     const userId = req.params.user_id
-
-    pool.query('SELECT * FROM users WHERE userid = $1', [userId], (error, results) => {
-        if (error) {
-            throw(error)
-        }
-        if (results.rows.length <= 0) {
+    const knexInstance = req.app.get('db');
+    UsersService.getById(knexInstance, userId)
+    .then(users => {
+        if(!users) {
             return res.status(404).json({
                 error: { message: `User doesn't exist` }
               })
         }
-        res.status(200).json(results.rows)
+        res.json(users)
     })
+    .catch(next)
 }
 
 exports.create_user = function (req, res) {
