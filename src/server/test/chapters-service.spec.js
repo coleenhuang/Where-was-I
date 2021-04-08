@@ -74,7 +74,6 @@ describe('Chapters service object', () => {
             })
             it('should return undefined for nonexistent book', () => {
                 const id = 55;
-                
                 return ChaptersService
                 .getById(db, id)
                 .then(chapters => {
@@ -115,7 +114,6 @@ describe('Chapters service object', () => {
             ]
             it('should return the chapters for the book', () => {
                 const book_id = 1;
-                
                 return ChaptersService
                 .getByBookId(db, book_id)
                 .then(chapters => {
@@ -132,6 +130,45 @@ describe('Chapters service object', () => {
                     expect(chapters).to.have.lengthOf(0);
                 })
             });
+        })
+    })
+    describe('getByChapterName()', () => {
+        it('should return undefined', () => {
+            return ChaptersService
+            .getByChapterName(db, 999, 43)
+            .then(chapters => expect(chapters).to.be.undefined)
+        })
+        context('there is data', () => {
+            beforeEach('insert data', () => 
+                db('books').insert(testBooks)
+                .then(() => db('chapters').insert(testChapters))
+            )
+
+            it('should return the existing chapter', () => {
+                const bookId = 1;
+                const chapterName = 1;
+                const expectedChapter = {
+                    id: 1,
+                    chapter_name: 1,
+                    num_of_verses: 31,
+                    book_id: 1,
+                    book_name: 'Genesis'
+                }
+                return ChaptersService
+                .getByChapterName(db, chapterName, bookId)
+                .then(chapters => {
+                    expect(chapters).to.eql(expectedChapter);
+                })
+            })
+            it('should return undefined for nonexistent chapter', () => {
+                const bookId = 44;
+                const chapterName = 43;
+                return ChaptersService
+                .getByChapterName(db, chapterName, bookId)
+                .then(chapters => {
+                    expect(chapters).to.be.undefined;
+                })
+            })
         })
     })
     

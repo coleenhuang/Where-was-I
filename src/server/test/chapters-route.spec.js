@@ -16,8 +16,8 @@ describe('Chapters endpoints', () => {
         app.set('db', db)
     });
 
-    before('clean db', () => db.raw('TRUNCATE users, books, chapters, reading_goal RESTART IDENTITY CASCADE'));
-    afterEach('clean db', () => db.raw('TRUNCATE users, books, chapters, reading_goal RESTART IDENTITY CASCADE'));
+    before('clean db', () => db.raw('TRUNCATE users, books, chapters, reading_goal, reading_progress RESTART IDENTITY CASCADE'));
+    afterEach('clean db', () => db.raw('TRUNCATE users, books, chapters, reading_goal, reading_progress RESTART IDENTITY CASCADE'));
 
     after('disconnect from db', () => db.destroy());
     const testBooks = makeBooksArray();
@@ -64,6 +64,36 @@ describe('Chapters endpoints', () => {
                 const expectedChapter = testChapters[0]
                 return supertest(app)
                 .get('/api/chapters/1')
+                .expect(200, expectedChapter)
+            })
+        })
+    })
+
+    describe('GET api/chapters/:book_id/:chapter_name', () => {
+        const errorMessage = {
+            error: {message: 'Chapter doesn\'t exist'}
+        }
+        it('returns an error', () => {
+            return supertest(app)
+            .get('/api/chapters/55/1')
+            .expect(404, errorMessage)
+        })
+        context('there is data', () => {
+            beforeEach('insert data', () => 
+                db('books').insert(testBooks)
+                .then(() => db('chapters').insert(testChapters))
+            )
+            
+            it('responds with 200 and the chapter', () => {
+                const expectedChapter = {
+                    id: 3,
+                    chapter_name: 1,
+                    num_of_verses: 25,
+                    book_name:'Matthew',
+                    book_id: 3
+                }
+                return supertest(app)
+                .get('/api/chapters/3/1')
                 .expect(200, expectedChapter)
             })
         })

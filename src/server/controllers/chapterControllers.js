@@ -25,4 +25,21 @@ exports.chapter_by_id = function (req, res, next) {
     .catch(next)
 }
 
+exports.chapter_by_name = function(req, res, next) {
+    const knexInstance = req.app.get('db');
+    const bookId = req.params.book_id;
+    const chapterName = req.params.chapter_name;
+
+    ChaptersService.getByChapterName(knexInstance, chapterName, bookId)
+    .then(chapters => {
+        if (!chapters) {
+            return res.status(404).json({
+              error: { message: `Chapter doesn't exist` }
+            })
+          }
+        res.json(chapters)
+    })
+    .catch(next)
+}
+
 
