@@ -2,9 +2,9 @@ const PlansService = require('../services/plansService')
 
 exports.user_plans = function(req, res, next) {
     const knexInstance = req.app.get('db');
-    const userId = req.params.user_id
+    const userId = req.params.user_id;
 
-    PlansService.getByUserid(knexInstance, userId)
+    PlansService.getByUserId(knexInstance, userId)
     .then(plans => {
         res.json(plans)
     })

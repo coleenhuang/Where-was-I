@@ -15,7 +15,7 @@ describe('Plans Service Object', () => {
     });
 
     before('clean db', () => db.raw('TRUNCATE users, books, chapters, reading_goal RESTART IDENTITY CASCADE'));
-    afterEach('clean db', () => db.raw('TRUNCATE users, books, chapters, reading_goal RESTART IDENTITY CASCADE'));
+    beforeEach('clean db', () => db.raw('TRUNCATE users, books, chapters, reading_goal RESTART IDENTITY CASCADE'));
 
     after('destroy db connection', () => db.destroy());
 
@@ -26,7 +26,7 @@ describe('Plans Service Object', () => {
     describe('getByUserid()', () => {
         it('should return an empty array', () => {
             const userid = 'hjkhsjk'
-            PlansService.getByUserid(db, userid)
+            return PlansService.getByUserId(db, userid)
             .then(plans => {
                 expect(plans).to.be.a('array');
                 expect(plans).to.have.lengthOf(0)
@@ -41,7 +41,7 @@ describe('Plans Service Object', () => {
             it('should return plans', () => {
                 const userid = 'legolas1234';
                 const expectedPlans = testPlans.filter(plan => plan.user_id === userid);
-                PlansService.getByUserid(db, userid)
+                return PlansService.getByUserId(db, userid)
                 .then(plans => {
                     expect(plans).to.be.a('array');
                     expect(plans).to.eql(expectedPlans);

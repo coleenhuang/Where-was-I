@@ -9,5 +9,4 @@ router.get('/:book_id', bookController.book_by_id);
 router.get('/:book_id/chapters', bookController.book_chapters);
 
 
-
 module.exports = router;

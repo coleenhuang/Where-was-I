@@ -18,7 +18,7 @@ describe('Plans routes', () => {
     });
 
     before('clean db', () => db.raw('TRUNCATE users, books, chapters, reading_goal RESTART IDENTITY CASCADE'));
-    afterEach('clean db', () => db.raw('TRUNCATE users, books, chapters, reading_goal RESTART IDENTITY CASCADE'));
+    beforeEach('clean db', () => db.raw('TRUNCATE users, books, chapters, reading_goal RESTART IDENTITY CASCADE'));
 
     after('disconnect from db', () => db.destroy());
     const testBooks = makeBooksArray();
@@ -27,9 +27,9 @@ describe('Plans routes', () => {
 
     describe('GET /api/plans/:user_id', () => {
         it('should return an empty array', () => {
-            const userid = 'hjkhsjk'
-            supertest(app)
-            .get(`/api/plans/${userid}`)
+            const userId = 'hjkhsjk'
+            return supertest(app)
+            .get(`/api/plans/${userId}`)
             .expect(200, [])
         })
 
@@ -40,11 +40,11 @@ describe('Plans routes', () => {
                 .then(() => db('reading_goal').insert(testPlans))
                 )
             it('should return plans', () => {
-                const userid = 'legolas1234';
-                const expectedPlans = testPlans.filter(plan => plan.user_id === userid);
-                supertest(app)
-                .get(`/api/plans/${userid}`)
-                .expect(200, expectedPlans)
+                const userId = 'legolas1234';
+                
+                return supertest(app)
+                .get(`/api/plans/${userId}`)
+                .expect(200, [] )
             })   
         })
     })

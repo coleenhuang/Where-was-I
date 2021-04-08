@@ -5,7 +5,13 @@ exports.list_books = function (req, res, next) {
     //Gives a list of books
     const knexInstance = req.app.get('db')
     let testament = req.query.testament
-    if (testament) {
+    if (!testament) {
+        BooksService.getAllBooks(knexInstance)
+      .then(books => {
+        res.json(books)
+      }).catch(next)
+    }
+    else {
         //filter by testament query if it is present
         if (testament !== 'Old' && testament !== 'New') {
             res.status(404).json({
@@ -18,13 +24,9 @@ exports.list_books = function (req, res, next) {
                 res.json(books)
             })
             .catch(next)
-        }
-    }
-    BooksService.getAllBooks(knexInstance)
-      .then(books => {
-        res.json(books)
-      })
-      .catch(next)
+        }}
+    
+      
 }
 
 exports.book_by_id = function (req, res, next) {
