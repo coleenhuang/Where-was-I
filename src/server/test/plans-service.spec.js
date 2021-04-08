@@ -40,7 +40,20 @@ describe('Plans Service Object', () => {
                 )
             it('should return plans', () => {
                 const userid = 'legolas1234';
-                const expectedPlans = testPlans.filter(plan => plan.user_id === userid);
+                const expectedPlans = [
+                    {   
+                        id: 1,
+                        book_name: "Genesis",
+                        book_id: 1,
+                        user_id: 'legolas1234'
+                    },
+                    {
+                        id: 2,
+                        book_id: 2,
+                        book_name: "Exodus",
+                        user_id: 'legolas1234'
+                    }
+                    ]
                 return PlansService.getByUserId(db, userid)
                 .then(plans => {
                     expect(plans).to.be.a('array');

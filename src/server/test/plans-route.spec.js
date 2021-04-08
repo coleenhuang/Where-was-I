@@ -41,10 +41,23 @@ describe('Plans routes', () => {
                 )
             it('should return plans', () => {
                 const userId = 'legolas1234';
-                
+                const expectedPlans = [
+                    {   
+                        id: 1,
+                        book_name: "Genesis",
+                        book_id: 1,
+                        user_id: 'legolas1234'
+                    },
+                    {
+                        id: 2,
+                        book_id: 2,
+                        book_name: "Exodus",
+                        user_id: 'legolas1234'
+                    }
+                    ]
                 return supertest(app)
                 .get(`/api/plans/${userId}`)
-                .expect(200, [] )
+                .expect(200, expectedPlans)
             })   
         })
     })
