@@ -1,4 +1,3 @@
-import { TokenExpiredError } from 'jsonwebtoken';
 import React from 'react';
 import AuthButton from './auth/authButton';
 
