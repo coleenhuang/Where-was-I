@@ -1,17 +1,18 @@
 import React from "react";
 import { useAuth0 } from "@auth0/auth0-react";
+import Button from '@material-ui/core/Button'
 
 export default () => {
   const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
 
   return (
       isAuthenticated?
-    <button onClick={() => logout({ returnTo: window.location.origin })}>
+    <Button variant='contained' color='primary' onClick={() => logout({ returnTo: window.location.origin })}>
       Log Out
-    </button> :
-    <button onClick={() => loginWithRedirect()}>
+    </Button> :
+    <Button variant='contained' color='primary' onClick={() => loginWithRedirect()}>
       Register / Log In
-    </button>
+    </Button>
   );
 };
 
