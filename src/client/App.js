@@ -16,11 +16,7 @@ const App = () => {
     <div>
       <Nav />
       <div>
-        <ul>
-          <li><Link to="/public">Public Page</Link></li>
-          <li><Link to="/protected">Protected Page</Link></li>
-          <li><Link to="/chart">Chart</Link></li>
-        </ul>
+        
         <Switch>
         <Route exact path="/" component={Home} />
         <PrivateRoute path="/chart" component={Chart} />

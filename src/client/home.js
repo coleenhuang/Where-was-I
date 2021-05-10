@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAuth0 } from "@auth0/auth0-react";
-
+import { Link } from 'react-router-dom';
 
 //Landing page for login
 //Redirect to here when attempting to access
@@ -10,8 +10,8 @@ export default () => {
     
     return (
         <div>
-            <h2>Where was I?</h2>
-            <h3>A bible reading tracker that helps you keep track of what you've read and reach your bible reading goals.</h3>
+            <h2>"Your word is a lamp to my feet and a light to my path."</h2>
+            <Link to="/chart">Reading Plan</Link>
         </div>
     )
 }
