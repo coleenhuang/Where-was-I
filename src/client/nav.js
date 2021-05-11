@@ -1,9 +1,16 @@
 import React from 'react';
 import AuthButton from './auth/authButton';
+import AppBar from "@material-ui/core/AppBar"
+import ToolBar from '@material-ui/core/Toolbar'
+import Typography from '@material-ui/core/Typography'
 
 export default () => (
-    <nav>
-        <h1>Where was I?</h1>
-        <AuthButton />
-    </nav>
+    <AppBar position='static' color="primary">
+        <ToolBar>
+            <Typography variant='h6'>
+                Where was I?
+            </Typography>
+            <AuthButton />
+        </ToolBar>
+    </AppBar>
 )

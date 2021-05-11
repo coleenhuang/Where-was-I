@@ -1,18 +1,19 @@
 import React from 'react';
 import Chapter from './Chapter';
+import Container from '@material-ui/core/Container'
 
 //Get a list of chapters for each book
 //Shrink and display for chapters
 
 const Book = (props) => {
     return (
-        <div className='book'>
+        <Container className='book' maxWidth='md'>
             <h2 className='book-name'>{props.name}</h2>
             <div className='chapt-grid'>
                 {renderChapters(props.chapts)}
             </div>
             
-        </div>
+        </Container>
     )
 }
 

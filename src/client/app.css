@@ -7,33 +7,24 @@
 body {
   text-align: center;
   margin: auto;
-  font-family: 'Raleway', sans-serif;
-  color: var(--light-shades);
-  background-color: var(--dark-shades);
-  padding: 0 5%;
+  padding: 0;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: 'Lato', sans-serif;
-}
 
-h1{
- color: var(--light-shades);
-}
+
 .chart {
-  max-width: 800px;
   margin: 0 auto;
+  padding: 1rem 2rem;
 }
 
 .book {
-  border: 1px solid var(--primary-1);
+  border: black solid 0.1px;
   margin-bottom: 2rem;
-  background-color: var(--light-shades);
-  border-radius: var(--round-corner);
+  
 }
 
 .book-name {
-  color: var(--main);
+  
   margin: 0;
   padding: 0.75rem;
 }
@@ -50,7 +41,6 @@ h1{
   margin: 0.5rem auto;
   padding: 0.5rem;
   font-size: 22px;
-  color: var(--dark-shades);
   text-align: center;
   display: flex;
   justify-content: center;
@@ -63,15 +53,13 @@ h1{
 
 
 .in-progress {
-  border: 3px solid var(--success-5);
+  border: 3px solid green;
   border-radius: 50%;
 }
 
 .read {
-  background-color: var(--success-6);
+  background-color: green;
   border-radius: 50%;
 }
 
-.read-selector {
-  background-color: var(--light-accent);
-}
+

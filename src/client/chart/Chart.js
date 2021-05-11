@@ -14,7 +14,7 @@ const Chart = (props) => {
     }, [])
 
     return (
-        <div className='chart'>
+        <div>
             {renderBooks(props.bookList)}
         </div>
     )

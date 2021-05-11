@@ -7,10 +7,10 @@ export default () => {
 
   return (
       isAuthenticated?
-    <Button variant='contained' color='primary' onClick={() => logout({ returnTo: window.location.origin })}>
+    <Button variant='contained' color='inherit' onClick={() => logout({ returnTo: window.location.origin })}>
       Log Out
     </Button> :
-    <Button variant='contained' color='primary' onClick={() => loginWithRedirect()}>
+    <Button variant='contained' color='inherit' onClick={() => loginWithRedirect()}>
       Register / Log In
     </Button>
   );
